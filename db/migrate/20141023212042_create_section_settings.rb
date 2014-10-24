@@ -1,12 +1,12 @@
 class CreateSectionSettings < ActiveRecord::Migration
   def change
     create_table :section_settings do |t|
-      t.time_id :integer
-      t.inst_id :integer
-      t.room_id :integer
-      t.date_id :integer
+      t.references :time_slot
+      t.references :instructor
+      t.references :room
+      t.references :course_date
 
       t.timestamps
     end
-  end
+ end
 end

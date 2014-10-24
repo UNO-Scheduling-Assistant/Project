@@ -1,8 +1,8 @@
 class CreateInstructors < ActiveRecord::Migration
   def change
     create_table :instructors do |t|
-      t.first_name :string
-      t.last_name :string
+      t.string :first_name
+      t.string :last_name
 
       t.timestamps
     end

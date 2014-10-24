@@ -1,13 +1,16 @@
 class CreateRooms < ActiveRecord::Migration
   def change
     create_table :rooms do |t|
-      t.building :string
-      t.room_num :integer
-      t.room_capacity :integer
-      t.desk_type :string
-      t.board_type :string
-      t.chair_type :string
+      t.string  :building
+      t.integer :room_num
+      t.integer :room_capacity
+      t.string  :desk_type
+      t.string  :board_type
+      t.string  :chair_type
       t.timestamps
+
     end
+    add_index :rooms, ["building", "room_num"], :unique => true
+    #execute "ALTER TABLE rooms ADD PRIMARY KEY (building, room_num);"
   end
 end
