@@ -1,19 +1,3 @@
-#== README
-# This README would normally document whatever steps are necessary to get the
-# application up and running.
-# Things you may want to cover:
-# * Ruby version
-#* System dependencies
-# * Configuration
-# * Database creation
-# * Database initialization
-# * How to run the test suite
-# * Services (job queues, cache servers, search engines, etc.)
-# * Deployment instructions
-#* ...
-#Please feel free to use a different markup language if you do not plan to run
-# <tt>rake doc:app</tt>.
-
 = Initial Documentation
 
 This is an example paragraph to seperate the second heading.
@@ -32,59 +16,52 @@ I have put the code for creating the report table in the section model.  The fun
 
 Calling the report table function is really simple.  All that needs to happen is the following code below.
 
-==== Start Code
-Section.report_table_query
-==== End Code
+  Section.report_table_query
 
 This should be used in the controller by creating an instance variable.  So in controller foo, function bar this is how it would go
 
-==== Start Code
-class FooController
-  ...
-  def bar
-    @report_array = Section.report_table_query
+  class FooController
     ...
+    def bar
+      @report_array = Section.report_table_query
+      ...
+    end
   end
-end
-==== End Code
 
 This can be accessed in the view by the following code
 
-==== Start Code
-
-<% @report_array.each do |row| %>
-...
-<%= row.class_num %>
-...
-<% end %>
-==== End Code
-
+  <% @report_array.each do |row| %>
+  ...
+  <%= row.class_num %>
+  ...
+  <% end %>
 
 === Variable Names
 
-class_num
-subject
-course_id
-sec_id
-course_name
-section_description
-acad_group
-enroll_cap
-days
-start_hour
-start_minute
-end_hour
-end_minute
-building
-room_num
-room_cap
-last_name
-first_name
-start_date
-end_date
-location
-mode
-crsatr_val
+- class_num
+- subject
+- course_id
+- sec_id
+- course_name
+- section_description
+- acad_group
+- enroll_cap
+- days
+- start_hour
+- start_minute
+- end_hour
+- end_minute
+- building
+- room_num
+- room_cap
+- last_name
+- first_name
+- start_date
+- end_date
+- location
+- mode
+- crsatr_val
+- component
 
 == Other Query Ideas
 

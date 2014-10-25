@@ -1,0 +1,1 @@
+var search_data = {"index":{"searchIndex":["readme"],"longSearchIndex":[""],"info":[["README","","README_rdoc.html","","<p>Initial Documentation\n<p>This is an example paragraph to seperate the second heading.\n<p>Database Functions\n"]]}}
