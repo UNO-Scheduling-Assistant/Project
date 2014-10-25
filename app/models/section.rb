@@ -1,9 +1,52 @@
+# == Description
+# This is the table for the course section.
+# This is the main table, which can join all
+# other tables.
+#
+# == Column Names
+# * class_num
+# * course_id
+# * section_setting_id
+# * sec_id
+# * sec_description
+# * sec_capacity
+# * crsatr_val
+# * mode
+# * acad_group
+# * location
+# * component
+# 
+# == Notes
+# All the other *_id's correspond to another table, except sec_id.
+# sec_id is the section number for a course.
+#
+# == Model List
+# Ordered by least dependent to most dependent
+#
+#
+#
+# Course
+#
+# CourseDate
+#
+# Instructor
+#
+# Room
+#
+# TimeSlot
+#
+# SectionSetting
+#
+# Section
 class Section < ActiveRecord::Base
   belongs_to :course
   belongs_to :section_setting
 
   validates :sec_id, presence: true
   
+  # Combines multiple tables into one table for generating reports
+  #
+  # Returns an array of rows
   def self.report_table_query
     report_query = ([]  <<  'sections.class_num as class_num, ' <<
                         'courses.subject as subject, ' <<

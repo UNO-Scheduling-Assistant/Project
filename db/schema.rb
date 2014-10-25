@@ -14,15 +14,13 @@
 ActiveRecord::Schema.define(version: 20141023212241) do
 
   create_table "course_dates", force: true do |t|
-    t.integer  "year"
-    t.string   "semester"
     t.date     "start_date"
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "course_dates", ["year", "semester"], name: "index_course_dates_on_year_and_semester", unique: true
+  add_index "course_dates", ["start_date", "end_date"], name: "index_course_dates_on_start_date_and_end_date", unique: true
 
   create_table "courses", force: true do |t|
     t.integer  "course_id"

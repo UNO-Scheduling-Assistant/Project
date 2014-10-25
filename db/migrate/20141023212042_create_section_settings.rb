@@ -8,5 +8,6 @@ class CreateSectionSettings < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :section_settings, ["time_slot_id", "instructor_id", "room_id"], unique: true
  end
 end

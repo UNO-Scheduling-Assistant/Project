@@ -1,3 +1,39 @@
+# == Description
+# This is the table for the section settings.
+#
+# Many sections are combination sections with the
+# same instructor, time slot, and room.
+# This table removes redundancy, and can also
+# be used to identify what section is a combination
+# section.
+#
+# == Column Names
+# * instructor_id
+# * time_slot_id
+# * room_id
+# * course_date_id
+# 
+# == Notes
+# All columns are foreign keys
+#
+# == Model List
+# Ordered by least dependent to most dependent
+#
+#
+#
+# Course
+#
+# CourseDate
+#
+# Instructor
+#
+# Room
+#
+# TimeSlot
+#
+# SectionSetting
+#
+# Section
 class SectionSetting < ActiveRecord::Base
 	has_many    :sections
 
