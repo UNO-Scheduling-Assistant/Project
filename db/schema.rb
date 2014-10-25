@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20141023212241) do
     t.datetime "updated_at"
   end
 
+  add_index "instructors", ["first_name", "last_name"], name: "index_instructors_on_first_name_and_last_name", unique: true
+
   create_table "rooms", force: true do |t|
     t.string   "building"
     t.integer  "room_num"
@@ -90,5 +92,7 @@ ActiveRecord::Schema.define(version: 20141023212241) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "time_slots", ["days", "start_time_hour", "start_time_minute", "end_time_hour", "end_time_minute"], name: "time_slot_index", unique: true
 
 end
