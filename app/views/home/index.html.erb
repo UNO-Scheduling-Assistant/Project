@@ -1,2 +1,3 @@
-<%= link_to "Import Spreadsheet", controller: "home", action: "import" %>
-<%= link_to "List", controller: "home", action: "list" %>
+<%= link_to "Import Spreadsheet", controller: "home", action: "import" %><br />
+<%= link_to "List", controller: "home", action: "list" %><br />
+<%= link_to "Destroy all data", {controller: 'home', action: 'delete_all'}, confirm: "WARNING: All data will be destroyed. Are you sure you want to do that?" %>

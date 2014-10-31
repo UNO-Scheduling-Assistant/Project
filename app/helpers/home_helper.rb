@@ -5,15 +5,17 @@ include ApplicationHelper
 
 module HomeHelper
   def read_csv(file)
-    file = CSV.open file.path, headers: true
+    csv = CSV.open file.path, headers: true
 
-    file.each { |row| put_row_into_database(row) }
+    csv.each { |row| put_row_into_database(row) }
   end
 
   private
 
   def put_row_into_database(row)
     write_section(row, write_course(row))
+
+    sleep(0.3)
   end
 
   def write_section(row, course)

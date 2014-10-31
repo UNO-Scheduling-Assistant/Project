@@ -8,6 +8,7 @@ CourseSchedulingAssistant::Application.routes.draw do
    get 'export' => 'home#export'
    post 'do_import' => 'home#do_import'
    get 'list' => 'home#list'
+   get 'emptydb' => 'home#delete_all'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
