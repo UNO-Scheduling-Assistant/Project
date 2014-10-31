@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(version: 20141023212241) do
 
   create_table "course_dates", force: true do |t|
-    t.date     "start_date"
-    t.date     "end_date"
+    t.string   "start_date"
+    t.string   "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 20141023212241) do
     t.datetime "updated_at"
   end
 
+  add_index "section_settings", ["time_slot_id", "instructor_id", "room_id"], name: "section_setting_index", unique: true
+
   create_table "sections", force: true do |t|
     t.integer  "class_num"
     t.integer  "course_id"
@@ -79,7 +81,7 @@ ActiveRecord::Schema.define(version: 20141023212241) do
     t.datetime "updated_at"
   end
 
-  add_index "sections", ["course_id", "sec_id"], name: "index_sections_on_course_id_and_sec_id", unique: true
+  add_index "sections", ["course_id", "sec_id", "section_setting_id"], name: "section_index", unique: true
 
   create_table "time_slots", force: true do |t|
     t.string   "days"

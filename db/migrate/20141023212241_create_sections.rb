@@ -15,6 +15,6 @@ class CreateSections < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :sections, ["course_id", "sec_id"], :unique => true
+    add_index :sections, ["course_id", "sec_id", "section_setting_id"], name: "section_index", :unique => true
   end
 end

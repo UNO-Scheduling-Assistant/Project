@@ -1,0 +1,6 @@
+<h1>Import Spreadsheet</h1>
+<%= form_tag('/do_import', multipart: true ) do %>
+<p><label for="upload_file">Select File</label> :
+<%= file_field :import, :file %></p>
+<%= submit_tag 'Import' %>
+<% end %>

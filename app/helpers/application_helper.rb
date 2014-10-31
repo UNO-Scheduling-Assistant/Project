@@ -16,7 +16,7 @@ module ApplicationHelper
   def insert_into(model, values)
     return model.where(values).select(:id)[0].id if model.where(values).count > 0
 
-    model.new(values).save
+    model.create(values)
     model.last.id
   end
 end

@@ -32,6 +32,4 @@ class CourseDate < ActiveRecord::Base
 	
 	has_many :section_settings
 
-	validates :year, presence: true
-	validates :semester, presence: true
 end
