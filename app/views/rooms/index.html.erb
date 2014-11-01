@@ -1,0 +1,35 @@
+<style>
+  th { text-align: left;}
+  .odd { background-color: #eeeeee;}
+  .even {background-color: #bebebe;}
+</style>
+
+<table>
+  <tr>
+    <td><%= link_to "New Room", new_room_path %></td>
+  <tr>
+    <th>Building</th>
+    <th>Room Number</th>
+    <th>Capacity</th>
+    <th>Desk Type</th>
+    <th>Board Type</th>
+    <th>Chair Type</th>
+    <th>Updated</th>
+    <th>Functions</th>
+  </tr>
+  <% @rooms.each_with_index do |room, i| %>
+  <tr>
+    <td class=<%= @get_class.call(i) %>><%= room.building %></td>
+    <td class=<%= @get_class.call(i) %>><%= room.room_num %></td>
+    <td class=<%= @get_class.call(i) %>><%= room.room_capacity %></td>
+    <td class=<%= @get_class.call(i) %>><%= room.desk_type %></td>
+    <td class=<%= @get_class.call(i) %>><%= room.board_type %></td>
+    <td class=<%= @get_class.call(i) %>><%= room.chair_type %></td>
+    <td class=<%= @get_class.call(i) %>><%= room.updated_at %></td>
+    <td class=<%= @get_class.call(i) %>><%= link_to "Edit", edit_room_path(room) %>
+        <%= link_to "Delete", room_path(room), method: :delete, data: {confirm: "Are you sure you want to delete this room?"} %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+

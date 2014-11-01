@@ -46,6 +46,13 @@ class Section < ActiveRecord::Base
   
   # Combines multiple tables into one table for generating reports
   #
+  # Returns the report table
+  def self.report_table_array
+    self.report_table_query.to_a
+  end
+
+  # Combines multiple tables into one table for generating reports
+  #
   # Returns an array of rows
   def self.report_table_query
     report_query = ([]  <<  'sections.class_num as class_num, ' <<
@@ -73,6 +80,6 @@ class Section < ActiveRecord::Base
                         'sections.crsatr_val as crsatr_val, ' <<
                         'sections.component as component').join("")
     
-    Section.joins(:course, section_setting: [:instructor, :time_slot, :room, :course_date]).select(report_query).to_a
+    Section.joins(:course, section_setting: [:instructor, :time_slot, :room, :course_date]).select(report_query)
   end
 end

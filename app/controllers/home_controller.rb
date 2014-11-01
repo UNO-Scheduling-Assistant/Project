@@ -21,7 +21,7 @@ class HomeController < ApplicationController
   end
 
   def list
-    @report_table = Section.report_table_query
+    @report_table = Section.report_table_array
   end
 
   def delete_all
