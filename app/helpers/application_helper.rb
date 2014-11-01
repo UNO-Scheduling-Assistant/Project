@@ -19,4 +19,8 @@ module ApplicationHelper
     model.create(values)
     model.last.id
   end
+
+  def table_row_class_proc
+    Proc.new { |n| n % 2 == 0 ? "table-row-even" : "table-row-odd" }
+  end
 end

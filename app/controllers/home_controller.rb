@@ -22,6 +22,7 @@ class HomeController < ApplicationController
 
   def list
     @report_table = Section.report_table_array
+    @get_class = table_row_class_proc
   end
 
   def delete_all

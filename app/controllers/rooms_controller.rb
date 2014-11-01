@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   include RoomsHelper
+  include ApplicationHelper
 
   def new
     @room = Room.new
@@ -15,7 +16,7 @@ class RoomsController < ApplicationController
   def index
     @rooms = Room.all
 
-    @get_class = Proc.new {|n| n % 2 == 0 ? "even" : "odd" }
+    @get_class = table_row_class_proc
   end
 
   def edit

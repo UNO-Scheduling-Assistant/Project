@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   include CoursesHelper
+  include ApplicationHelper
 
   def new
     @course = Course.new
@@ -15,7 +16,7 @@ class CoursesController < ApplicationController
   def index
     @courses = Course.all.sort { |c1, c2| ("#{c1.subject}#{c1.course_id}" <=> "#{c2.subject}#{c2.course_id}") }
 
-    @get_class = Proc.new {|n| n % 2 == 0 ? "even" : "odd" }
+    @get_class = table_row_class_proc
   end
 
   def edit

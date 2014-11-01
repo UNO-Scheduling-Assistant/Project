@@ -1,10 +1,7 @@
-<style>
-  th { text-align: left;}
-</style>
 
 <h1>List of all Sections</h1>
   <table width="150%">
-    <tr>
+    <tr class="table-heading">
       <th>Class Num</th>
       <th>Subject</th>
       <th>Course Num</th>
@@ -19,16 +16,18 @@
       <th>Room</th>
       <th>Capacity</th>
       <th>Last</th>
-      <th>First</th>
+      <th>First Name</th>
+      <th>Role</th>
       <th>Start Date</th>
       <th>End Date</th>
+      <th>Session</th>
       <th>Location</th>
       <th>Mode</th>
       <th>CrsAtr Val</th>
       <th>Component</th>
     </tr>
-<% @report_table.each do |row| %>
-    <tr>
+<% @report_table.each_with_index do |row, i| %>
+    <tr class=<%= @get_class.call(i) %>>
       <td><%= row.class_num %></td>
       <td><%= row.subject %></td>
       <td><%= row.course_id %></td>
@@ -44,8 +43,10 @@
       <td><%= row.room_cap %></td>
       <td><%= row.last_name %></td>
       <td><%= row.first_name %></td>
+      <td><%= row.role %></td>
       <td><%= row.start_date %></td>
       <td><%= row.end_date %></td>
+      <td><%= row.session %></td>
       <td><%= row.location %></td>
       <td><%= row.mode %></td>
       <td><%= row.crsatr_val %></td>

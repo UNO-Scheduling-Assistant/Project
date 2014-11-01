@@ -27,6 +27,8 @@ module HomeHelper
                           sec_description: row['SDescr'],
                           sec_capacity: row['Cap Enrl'],
                           acad_group: row['Acad Group'],
+                          role: row['Role'],
+                          session: row['Session'],
                           crsatr_val: row['CrsAtr Val'],
                           component: row['Component'],
                           location: row['Location'],
