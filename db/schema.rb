@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 20141023212241) do
     t.string   "acad_group"
     t.string   "location"
     t.string   "component"
+    t.string   "role"
+    t.integer  "session"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

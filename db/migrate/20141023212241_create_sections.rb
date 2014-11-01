@@ -12,6 +12,8 @@ class CreateSections < ActiveRecord::Migration
       t.string :acad_group
       t.string :location
       t.string :component
+      t.string :role
+      t.integer :session
 
       t.timestamps
     end

@@ -73,8 +73,10 @@ class Section < ActiveRecord::Base
                         'rooms.room_capacity as room_cap, ' <<
                         'instructors.last_name as last_name, ' <<
                         'instructors.first_name as first_name, '  <<
+                        'sections.role as role, ' <<
                         'course_dates.start_date as start_date, ' <<
                         'course_dates.end_date as end_date, ' <<
+                        'sections.session as session, ' <<
                         'sections.location as location, ' <<
                         'sections.mode as mode, ' <<
                         'sections.crsatr_val as crsatr_val, ' <<
