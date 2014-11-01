@@ -1,4 +1,13 @@
-.table-heading th 
+.list-table { border-collapse: collapse;}
+.list-table th, .list-table td
+{
+	/*border: 1px solid black; */
+	border: 0;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+.list-table tr th 
 { 
   text-align: left;
   background-color: #000000;

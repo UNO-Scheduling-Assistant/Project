@@ -11,3 +11,22 @@
  *= require_self
  *= require_tree .
  */
+
+body
+{
+	background-color: #cfcfcf;
+}
+
+body a
+{
+	color: #c01010;
+	text-decoration: none;
+
+}
+
+body a:hover
+{
+	color: #000000;
+	font-weight: bold;
+}
+
