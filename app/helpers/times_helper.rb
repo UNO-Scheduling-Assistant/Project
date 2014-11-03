@@ -37,7 +37,7 @@ module TimesHelper
   end
 
   def get_minute_hash
-     (0..11).map { |n| [sprintf("%02d", n * 5), n * 5] }
+     (0..11).map { |n| [sprintf("%02d", n * 5), sprintf("%02d", n * 5)]}
   end
 
   def get_period_hash
