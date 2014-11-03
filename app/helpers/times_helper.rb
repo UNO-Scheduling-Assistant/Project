@@ -1,12 +1,35 @@
 module TimesHelper
   include ApplicationHelper
 
-  def get_time_instructors
+  def get_time_assoc
+    TimeSlot.all.map{ |time| yield(time) }
+  end
 
+  def get_time_instructors
+    get_time_assoc { |t| get_time_instructor(t) }
+  end
+
+  def get_time_instructor(time)
+    time.section_settings.size
   end
 
   def get_time_sections
+    get_time_assoc { |t| get_time_section(t) }
+  end
 
+  def get_time_section(time)
+    sum = 0
+    time.section_settings.each { |ss| sum += ss.sections.size }
+    
+    sum
+  end
+
+  def get_time_rooms
+    get_time_assoc { |t| get_time_room(t) }
+  end
+
+  def get_time_room(time)
+    time.section_settings.select('room_id').uniq.count
   end
 
   def get_hour_hash

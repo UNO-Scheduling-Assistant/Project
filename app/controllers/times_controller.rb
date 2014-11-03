@@ -15,6 +15,7 @@ class TimesController < ApplicationController
     @times = TimeSlot.all
     @instructors = get_time_instructors
     @sections = get_time_sections
+    @rooms = get_time_rooms
     @get_class = table_row_class_proc
   end
 end
