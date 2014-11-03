@@ -44,7 +44,7 @@ module TimesHelper
      ["9", 9],
      ["10", 10],
      ["11", 11],
-     ["12", 0]]
+     ["12", 12]]
   end
 
   def get_minute_hash
@@ -63,7 +63,32 @@ module TimesHelper
   end
 
   def get_period_hash
-    [["A.M.", 0],
-     ["P.M.", 1]]
+    [["A.M.", "AM"],
+     ["P.M.", "PM"]]
+  end
+
+  def get_days(params)
+    day_str = (params[:monday].nil? ? "" : "M" )
+    day_str += (params[:tuesday].nil? ? "" : "T")
+    day_str += (params[:wednesday].nil? ? "" : "W")
+    day_str += (params[:thursday].nil? ? "" : "R")
+    day_str += (params[:friday].nil? ? "" : "F")
+
+    day_str
+  end
+
+  def get_stime(params)
+    get_setime(params, {hr: :s_hr, min: :s_min, per: :s_per})
+
+  end
+
+  def get_etime(params)
+     get_setime(params, {hr: :e_hr, min: :e_min, per: :e_per})
+  end
+
+  def get_setime(params, using)
+    time = "#{params[using[:hr]]}:#{params[using[:min]]}:00 #{params[using[:per]]}"
+
+    {hour: get_hour(time).to_i, minute: get_minute(time).to_i}
   end
 end
