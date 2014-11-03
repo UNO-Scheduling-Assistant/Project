@@ -87,14 +87,12 @@ ActiveRecord::Schema.define(version: 20141023212241) do
 
   create_table "time_slots", force: true do |t|
     t.string   "days"
-    t.integer  "start_time_hour"
-    t.integer  "start_time_minute"
-    t.integer  "end_time_hour"
-    t.integer  "end_time_minute"
+    t.string   "start_time"
+    t.string   "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "time_slots", ["days", "start_time_hour", "start_time_minute", "end_time_hour", "end_time_minute"], name: "time_slot_index", unique: true
+  add_index "time_slots", ["days", "start_time", "end_time"], name: "time_slot_index", unique: true
 
 end

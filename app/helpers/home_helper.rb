@@ -45,10 +45,8 @@ module HomeHelper
 
   def write_time_slot(row)
     insert_into TimeSlot,  {days: row['Pat'],
-                            start_time_hour: get_hour(row['Mtg Start']),
-                            start_time_minute: get_minute(row['Mtg Start']),
-                            end_time_hour: get_hour(row['Mtg End']),
-                            end_time_minute: get_minute(row['Mtg End'])}
+                            start_time: row['Mtg Start'],
+                            end_time: row['Mtg End']}
   end
 
   def write_course_date(row)

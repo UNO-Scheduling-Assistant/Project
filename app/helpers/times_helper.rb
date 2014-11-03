@@ -89,6 +89,6 @@ module TimesHelper
   def get_setime(params, using)
     time = "#{params[using[:hr]]}:#{params[using[:min]]}:00 #{params[using[:per]]}"
 
-    {hour: get_hour(time).to_i, minute: get_minute(time).to_i}
+    #{hour: get_hour(time).to_i, minute: get_minute(time).to_i}
   end
 end

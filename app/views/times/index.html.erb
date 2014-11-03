@@ -12,8 +12,8 @@
   <% @times.each_with_index do |time, i| %>
   <tr class=<%= @get_class.call(i) %>>
     <td><%= time.days %></td>
-    <td><%= get_12h(time.start_time_hour, time.start_time_minute) %></td>
-    <td><%= get_12h(time.end_time_hour, time.end_time_minute) %></td>
+    <td><%= time.start_time %></td>
+    <td><%= time.end_time %></td>
     <td><%= @instructors[i] %></td>
     <td><%= @sections[i] %></td>
     <td><%= @rooms[i] %></td>
