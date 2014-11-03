@@ -12,11 +12,7 @@ class TimesController < ApplicationController
     stime = get_stime(params)
     etime = get_etime(params)
 
-    @time = TimeSlot.new(days: days, 
-                         start_time_hour: stime[:hour], 
-                         start_time_minute: stime[:minute], 
-                         end_time_hour: etime[:hour], 
-                         end_time_minute: etime[:minute])
+    @time = TimeSlot.new(days: days, start_time: stime, end_time: etime)
     @time.save
     
     redirect_to times_path

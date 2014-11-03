@@ -33,47 +33,23 @@ module TimesHelper
   end
 
   def get_hour_hash
-    [["1", 1],
-     ["2", 2],
-     ["3", 3],
-     ["4", 4],
-     ["5", 5],
-     ["6", 6],
-     ["7", 7],
-     ["8", 8],
-     ["9", 9],
-     ["10", 10],
-     ["11", 11],
-     ["12", 12]]
+    (1..12).map { |n| [n.to_s, n] }
   end
 
   def get_minute_hash
-    [["00", 0],
-     ["05", 5],
-     ["10", 10],
-     ["15", 15],
-     ["20", 20],
-     ["25", 25],
-     ["30", 30],
-     ["35", 35],
-     ["40", 40],
-     ["45", 45],
-     ["50", 50],
-     ["55", 55]]
+     (0..11).map { |n| [sprintf("%02d", n * 5), n * 5] }
   end
 
   def get_period_hash
-    [["A.M.", "AM"],
-     ["P.M.", "PM"]]
+    [["AM", "AM"],
+     ["PM", "PM"]]
   end
 
   def get_days(params)
-    day_str = (params[:monday].nil? ? "" : "M" )
-    day_str += (params[:tuesday].nil? ? "" : "T")
-    day_str += (params[:wednesday].nil? ? "" : "W")
-    day_str += (params[:thursday].nil? ? "" : "R")
-    day_str += (params[:friday].nil? ? "" : "F")
+    options = {monday: "M", tuesday: "T", wednesday: "W", thursday: "R", friday: "F"}
 
+    day_str = ""
+    options.each { |key, val| day_str += (params[key].nil? ? "" : val) }
     day_str
   end
 
@@ -89,6 +65,5 @@ module TimesHelper
   def get_setime(params, using)
     time = "#{params[using[:hr]]}:#{params[using[:min]]}:00 #{params[using[:per]]}"
 
-    #{hour: get_hour(time).to_i, minute: get_minute(time).to_i}
   end
 end

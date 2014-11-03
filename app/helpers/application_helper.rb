@@ -27,28 +27,17 @@ module ApplicationHelper
     Proc.new { |n| n % 2 == 0 ? "table-row-even" : "table-row-odd" }
   end
 
-  def convert_12h_to_24h(time)
-#    Time.strptime(time, "%I:%M:%S %P")
+  def hour(time)
+    time_conv(time).hour
   end
 
-  #def get_hour(time)
-   # return if time.nil?
-
- #   convert_12h_to_24h(time).hour
- # end
-
-  def get_minute(time)
-  #  return if time.nil?
-
-   # convert_12h_to_24h(time).min
+  def minute(time)
+    time_conv(time).minute
   end
 
-  def get_24h(hour, minute)
-  #  sprintf("%d:%02d:00", hour, minute)
-  end
+  private
 
-  def get_12h(hour, minute)
-  #  return if hour.nil? || minute.nil?
-  #  Time.strptime(get_24h(hour, minute), "%H:%M:%S").strftime("%I:%M:%S %P")
+  def time_conv(time)
+    Time.strptime(time, "%I%M%S %P")
   end
 end

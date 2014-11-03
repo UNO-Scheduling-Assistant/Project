@@ -17,7 +17,7 @@ module HomeHelper
   def put_row_into_database(row)
     write_section(row, write_course(row))
 
-    sleep(0.3)
+    sleep(0.01)
   end
 
   def write_section(row, course)
@@ -77,8 +77,6 @@ module HomeHelper
   def write_course(row)
     insert_into Course, subject: row['Subject'], course_id: row['Catalog'], name: row['CDescr']
   end
-
-
 
   def get_building_and_room(facil_id)
     facil_id.match(/([^0-9]+)([0-9]+)/)

@@ -64,10 +64,8 @@ class Section < ActiveRecord::Base
                         'sections.acad_group as acad_group, ' <<
                         'sections.sec_capacity as enroll_cap, ' <<
                         'time_slots.days as days, ' <<
-                        'time_slots.start_time_hour as start_hour, ' <<
-                        'time_slots.start_time_minute as start_minute, ' <<
-                        'time_slots.end_time_hour as end_hour, ' <<
-                        'time_slots.end_time_minute as end_minute, ' <<
+                        'time_slots.start_time as start_time, ' <<
+                        'time_slots.end_time as end_time, ' <<
                         'rooms.building as building, ' <<
                         'rooms.room_num as room_num, ' <<
                         'rooms.room_capacity as room_cap, ' <<
