@@ -1,3 +1,6 @@
+require 'time'
+require 'date'
+
 module ApplicationHelper
   # === Parameters:
   # model - model class name (eg: Instructor, Section, etc.)
@@ -22,5 +25,30 @@ module ApplicationHelper
 
   def table_row_class_proc
     Proc.new { |n| n % 2 == 0 ? "table-row-even" : "table-row-odd" }
+  end
+
+  def convert_12h_to_24h(time)
+    Time.strptime(time, "%I:%M:%S %P")
+  end
+
+  def get_hour(time)
+    return if time.nil?
+
+    convert_12h_to_24h(time).hour
+  end
+
+  def get_minute(time)
+    return if time.nil?
+
+    convert_12h_to_24h(time).min
+  end
+
+  def get_24h(hour, minute)
+    sprintf("%d:%02d:00", hour, minute)
+  end
+
+  def get_12h(hour, minute)
+    return if hour.nil? || minute.nil?
+    Time.strptime(get_24h(hour, minute), "%H:%M:%S").strftime("%I:%M:%S %P")
   end
 end

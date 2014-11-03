@@ -1,9 +1,11 @@
 require 'csv'
 require 'time'
 
-include ApplicationHelper
+
 
 module HomeHelper
+  include ApplicationHelper
+  
   def read_csv(file)
     csv = CSV.open file.path, headers: true
 
@@ -78,21 +80,7 @@ module HomeHelper
     insert_into Course, subject: row['Subject'], course_id: row['Catalog'], name: row['CDescr']
   end
 
-  def convert_12h_to_24h(time)
-    Time.strptime(time, "%I:%M:%S %P")
-  end
 
-  def get_hour(time)
-    return if time.nil?
-
-    convert_12h_to_24h(time).hour
-  end
-
-  def get_minute(time)
-    return if time.nil?
-
-    convert_12h_to_24h(time).min
-  end
 
   def get_building_and_room(facil_id)
     facil_id.match(/([^0-9]+)([0-9]+)/)
