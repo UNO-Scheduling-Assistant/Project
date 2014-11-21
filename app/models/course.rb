@@ -28,10 +28,11 @@
 # SectionSetting
 #
 # Section
-class Course < ActiveRecord::Base
-	#self.primary_keys = :course_id, :subject
-	has_many :sections
+class Course < ActiveRecord::Base 
+  #self.primary_keys = :course_id, :subject
+  has_many :sections
 
-	validates :course_id, presence: true
-	validates :subject, presence: true
+  validates :course_id, presence: true
+  validates :subject, presence: true
+  validates :name, presence: true
 end

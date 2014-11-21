@@ -7,10 +7,9 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.new(room_params)
-    @room.save
-
-    redirect_to rooms_path
+    valid = Room.create(room_params).valid?
+    flash.notice = (valid ? "Room created successfuly" : "Room not created: Invalid")
+    redirect_to (valid ? rooms_path : new_room_path)
   end
 
   def index

@@ -39,10 +39,36 @@
 #
 # Section
 class Section < ActiveRecord::Base
+
+  class SectionValidator < ActiveModel::Validator
+
+    def vnil(var)
+      var.nil? ? 0 : var
+    end
+
+    def cond_error(r, cond, error)
+      if cond
+        r.errors[:base] << error
+      end
+    end
+
+    def validate(record)
+      cond_error(record, (vnil(record.sec_id) <= 0), "Section number <= 0")
+      cond_error(record, (vnil(record.class_num) <= -1), "Negative class number")
+      cond_error(record, (vnil(record.sec_capacity) <= -1), "Negative enroll cap")
+    end
+  end
+
   belongs_to :course
   belongs_to :section_setting
 
   validates :sec_id, presence: true
+  
+  validates :sec_id, numericality: { only_integer: true }
+  validates :class_num, numericality: { only_integer: true }
+  validates :sec_capacity, numericality: { only_integer: true }
+
+  validates_with SectionValidator
   
   # Combines multiple tables into one table for generating reports
   #

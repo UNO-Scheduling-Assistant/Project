@@ -32,12 +32,12 @@ module ApplicationHelper
   end
 
   def minute(time)
-    time_conv(time).minute
+    time_conv(time).min
   end
 
   private
 
   def time_conv(time)
-    Time.strptime(time, "%I%M%S %P")
+    Time.strptime(time, "%I:%M:%S %P")
   end
 end
