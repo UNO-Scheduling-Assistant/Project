@@ -12,16 +12,23 @@
  *= require_tree .
  */
 
+html
+{
+	width:100%;
+	height:100%;
+}
 body
 {
 	background-color: #cfcfcf;
+	width:inherit;
+	height:inherit;
+	margin:0;
 }
 
 body a
 {
 	color: #c01010;
 	text-decoration: none;
-
 }
 
 body a:hover
@@ -30,3 +37,18 @@ body a:hover
 	font-weight: bold;
 }
 
+.ui.large.black.menu.absolute.top
+{
+	background-color:black;
+	border-bottom:medium solid red;
+	width:inherit;
+	position:relative;
+	top:0;
+	left:0;
+	margin:0;
+}
+
+.uno 
+{
+	background:url(logo-subsite-o-2.png);
+}
