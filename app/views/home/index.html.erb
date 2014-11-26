@@ -1,16 +1,28 @@
 <div class="ui large inverted black menu absolute top">
 	<div class="item uno"></div>
-	<div class="item"><img src="~/images/logo-subsite-o-2.png"></div>
-	<div class="item">UNO Course Scheduling Assistant</div>
+	<div class="item label">UNO Course Scheduling Assistant</div>
 </div>
-<div class="ui menu">
+<div class="ui grey menu">
 	<div class="ui simple dropdown item">Manage
 		<div class="menu">
-			<div class="item">Works</div>
+			<div class="item">Courses</div>
+			<div class="item">Rooms</div>
+			<div class="item">Instructors</div>
+			<div class="item">Times</div>
 		</div>
 	</div>
-	<div class="ui dropdown item">Schedule<div class="menu"></div></div>
-	<div class="ui dropdown item">Reports<div class="menu"></div></div>
+	<div class="ui simple dropdown item">Schedule
+		<div class="menu">
+			<div class="item">Display Schedule</div>
+			<div class="item">Import</div>
+			<div class="item">Export</div>
+			<div class="item">Purge All</div>
+		</div>
+	</div>
+	<div class="ui simple dropdown item">Reports
+		<div class="menu">
+		</div>
+	</div>
 </div>
 <h1>Course Scheduling Assistant</h1>
 <%= link_to "Import Spreadsheet", controller: "home", action: "import" %><br />
