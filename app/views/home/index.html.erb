@@ -4,4 +4,4 @@
 <%= link_to "Courses", courses_path %><br />
 <%= link_to "Time Slots", times_path %><br />
 <%= link_to "List", controller: "home", action: "list" %><br /><br /><br />
-<%= link_to "Destroy all data", {controller: 'home', action: 'delete_all'}, confirm: "WARNING: All data will be destroyed. Are you sure you want to do that?" %>
+<%= link_to "Destroy all data", {controller: 'home', action: 'delete_all'}, confirm: "WARNING: All data will be destroyed. Are you sure you want to do that?", method: 'delete' %>

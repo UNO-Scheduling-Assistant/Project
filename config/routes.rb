@@ -9,9 +9,9 @@ CourseSchedulingAssistant::Application.routes.draw do
    root 'home#index'
    get 'import' => 'home#import'
    get 'export' => 'home#export'
-   post 'do_import' => 'home#do_import'
+   post 'import' => 'home#do_import'
    get 'list' => 'home#list'
-   get 'emptydb' => 'home#delete_all'
+   delete '/' => 'home#delete_all'
 
 
 

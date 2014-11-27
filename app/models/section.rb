@@ -40,8 +40,20 @@
 # Section
 class Section < ActiveRecord::Base
 
+  # Initializes default values
   def initialize(params)
 
+    # === Params
+    # what - a parameter hash value
+    #
+    # === Return
+    # True if 'what' is an empty string
+    #
+    # False otherwise
+    #
+    # === Description
+    # A method inside of initialize(params), finds out if string 
+    # is empty.
     def is_str_empty?(what)
       what.class.name.eql?("String") && what.eql?("")
     end
@@ -57,6 +69,20 @@ class Section < ActiveRecord::Base
     super(params)
   end
 
+  # Untested until section adding is implemented.
+  #
+  # Checks its section setting and finds out how many sections it has.  
+  # If it has only one, delete the section setting.  
+  # Then delete the section.
+  def destroy
+    if section_setting.sections.count == 1
+      section_setting.destroy
+    end
+
+    super.destroy
+  end
+
+  # Validator for Section
   class SectionValidator < ActiveModel::Validator
 
     def vnil(var)
