@@ -42,9 +42,10 @@ describe ApplicationHelper do
 
   describe "insert_into calls " do
     it "returns the id of the new Course and puts it in the database" do
+      row_count = Course.all.count
       values = {subject: "CSCI", course_id: 4130, name: "No Name"}
       id = insert_into Course, values
-      expect([id, Course.where(values).count]).to eq([1, 1])
+      expect([id, Course.where(values).count]).to eq([row_count + 1, 1])
     end
 
     it "returns the id of the matching SectionSetting and doesn't put it in database" do

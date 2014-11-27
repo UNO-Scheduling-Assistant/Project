@@ -20,4 +20,14 @@ describe Course do
     course = Course.new(subject: "CSCI", course_id: 3940, name: "Peer Review")
     course.should be_valid
   end
+
+  it "should not be valid with catalog less than or equal to 0" do
+    course = Course.new(subject: "CSCI", course_id: -1, name: "TEST")
+    course.should_not be_valid
+  end
+
+  it "should not be valid with non-numeric catalog" do
+    course = Course.new(subject: "CSCI", course_id: "BAD", name: "GAG")
+    course.should_not be_valid
+  end
 end

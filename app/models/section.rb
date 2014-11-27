@@ -40,6 +40,23 @@
 # Section
 class Section < ActiveRecord::Base
 
+  def initialize(params)
+
+    def is_str_empty?(what)
+      what.class.name.eql?("String") && what.eql?("")
+    end
+
+    def default_val(what, val)
+      (is_str_empty?(what) || what.nil?) ? val : what
+    end
+
+    params[:session] = default_val(params[:session], 1)
+    params[:sec_id] = default_val(params[:sec_id], 1)
+    params[:sec_capacity] = default_val(params[:sec_capacity], 0)
+
+    super(params)
+  end
+
   class SectionValidator < ActiveModel::Validator
 
     def vnil(var)
@@ -56,6 +73,7 @@ class Section < ActiveRecord::Base
       cond_error(record, (vnil(record.sec_id) <= 0), "Section number <= 0")
       cond_error(record, (vnil(record.class_num) <= -1), "Negative class number")
       cond_error(record, (vnil(record.sec_capacity) <= -1), "Negative enroll cap")
+      cond_error(record, (vnil(record.session) <= -1), "Negative session")
     end
   end
 
@@ -63,10 +81,12 @@ class Section < ActiveRecord::Base
   belongs_to :section_setting
 
   validates :sec_id, presence: true
+  validates :course_id, presence: true
   
   validates :sec_id, numericality: { only_integer: true }
   validates :class_num, numericality: { only_integer: true }
   validates :sec_capacity, numericality: { only_integer: true }
+  validates :session, numericality: { only_integer: true }
 
   validates_with SectionValidator
   

@@ -29,10 +29,31 @@
 #
 # Section
 class Course < ActiveRecord::Base 
+
+  class CourseValidator < ActiveModel::Validator
+
+    def vnil(var)
+      var.nil? ? 0 : var
+    end
+
+    def cond_error(r, cond, error)
+      if cond
+        r.errors[:base] << error
+      end
+    end
+
+    def validate(record)
+      cond_error(record, (vnil(record.course_id) <= 0), "Course number <= 0")
+    end
+  end
   #self.primary_keys = :course_id, :subject
-  has_many :sections
+  has_many :sections, dependent: :destroy
 
   validates :course_id, presence: true
   validates :subject, presence: true
   validates :name, presence: true
+
+  validates :course_id, numericality: { only_integer: true }
+
+  validates_with CourseValidator
 end

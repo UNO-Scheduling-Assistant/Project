@@ -79,10 +79,11 @@ describe HomeHelper do
     end
 
     def test_no_dep_write_func(row, model, func)
+      row_count = model.all.count
       id = send(func, convert_hash(row))
       count = model.where(row).count
 
-      expect([id, count]).to eq([1, 1])
+      expect([id, count]).to eq([row_count + 1, 1])
     end
 
     it "instructor" do

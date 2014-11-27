@@ -46,7 +46,7 @@ module TimesHelper
   end
 
   def get_days(params)
-    options = {monday: "M", tuesday: "T", wednesday: "W", thursday: "R", friday: "F"}
+    options = {monday: "M", tuesday: "T", wednesday: "W", thursday: "R", friday: "F", saturday: "S"}
 
     day_str = ""
     options.each { |key, val| day_str += (params[key].nil? ? "" : val) }
