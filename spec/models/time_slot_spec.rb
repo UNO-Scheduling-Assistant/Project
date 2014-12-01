@@ -8,7 +8,7 @@ describe TimeSlot do
 
   it "should be valid with correct days" do
     time = TimeSlot.new(days: "MTWRFS", start_time: "1:30:00 PM", end_time: "2:30:00 PM")
-    time.should_be valid
+    time.should be_valid
   end
 
   context "should not be valid with incorrect" do
