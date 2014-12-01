@@ -37,6 +37,12 @@ body a:hover
 	font-weight: bold;
 }
 
+.content
+{
+	margin: 0.5em 0.5em 0.5em 0.5em;
+	padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
 .ui.large.black.menu.absolute.top
 {
 	background-color:black;

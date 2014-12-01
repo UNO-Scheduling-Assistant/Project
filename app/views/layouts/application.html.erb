@@ -8,7 +8,36 @@
 </head>
 <body>
 <!--<p class="flash"><%= flash.notice %></p>-->
-<%= yield %>
-
+<div class="ui large inverted black menu absolute top">
+	<div class="item uno"></div>
+	<div class="item label">UNO Course Scheduling Assistant</div>
+</div>
+<div class="ui grey menu">
+	<div class="ui simple dropdown item">Manage
+		<div class="menu">
+			<div class="item">Courses</div>
+			<div class="item">Rooms</div>
+			<div class="item">Instructors</div>
+			<div class="item">Times</div>
+		</div>
+	</div>
+	<div class="ui simple dropdown item">Schedule
+		<div class="menu">
+			<div class="item">Display Schedule</div>
+			<div class="item">Import</div>
+			<div class="item">Export</div>
+			<div class="item">Purge All</div>
+		</div>
+	</div>
+	<div class="ui simple dropdown item">Reports
+		<div class="menu">
+		</div>
+	</div>
+</div>
+<div class="content">
+	<div>
+	<%= yield %>
+	</div>
+</div>
 </body>
 </html>
