@@ -1,3 +1,77 @@
 // Place all the styles related to the courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.course-container
+{
+	background-color: #992222;
+	margin-top: 5px;
+	margin-bottom: 14px;
+	width: 100%;
+}
+
+.course-info
+{
+	width: 100%;
+	background-color: #992222;
+	display: inline-block;
+}
+
+.subject-catalog
+{
+	width: 20%;
+	float: left;
+	font-size: 1.3em;
+	font-family: sans-serif;
+	color: #bb7777;
+	margin-left: 1em;
+}
+
+.course-name
+{
+	float: left;
+	font-size: 1.3em;
+	font-family: sans-serif;
+	color: #bb7777;
+}
+
+.course-options
+{
+	float: right;
+	text-align: right;
+}
+
+.course-options a
+{
+	vertical-align: middle;
+	margin-right: 1em;
+	padding: 0;
+	font-size: 1.3em;
+	font-family: sans-serif;
+	color: #885555;
+}
+
+.sections-container
+{
+	min-height: 5em;
+	background-color: #f4d2d2;
+	font-family: sans-serif;
+	color: #551111;
+}
+
+.alrt { float: right; }
+.allt { float: left;  }
+.inblk { display: inline-block; }
+.full { width: 100%; }
+.half { width: 50%; }
+.quart { width: 25%;}
+.lmargin { margin-left: 0em; }
+.rmargin { margin-right: 0em; }
+.mbot { margin-bottom: 0.4em; }
+.rtalign { text-align: right;}
+.section-divider
+{
+	height: 1px;
+	width: 100%;
+	background-color: #e3c1c1;
+}
