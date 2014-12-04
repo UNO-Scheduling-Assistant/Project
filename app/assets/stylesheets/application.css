@@ -70,6 +70,12 @@ body .content a:hover
 	margin:0 !important;
 }
 
+.mentext
+{
+	color: #FFFFFF !important;
+	font-family: sans-serif !important;
+}
+
 .uno 
 {
 	background:url(logo-subsite-o-2.png);

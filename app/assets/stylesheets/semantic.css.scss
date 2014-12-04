@@ -2527,7 +2527,7 @@ body > .ui.grid {
 ---------------*/
 /*--- Light Colors  ---*/
 .ui.grey.menu {
-  background-color: #F0F0F0;
+  background-color: #000000;
 }
 /*--- Inverted Colors  ---*/
 .ui.inverted.green.menu {
@@ -10861,7 +10861,7 @@ body.ui.dimmed.dimmable > :not(.dimmer){
   display: none;
   top: 100%;
   margin: 0em;
-  background-color: #FFFFFF;
+  background-color: #6F6F6F;
   min-width: 100%;
   white-space: nowrap;
   font-size: 0.875em;
@@ -10918,6 +10918,7 @@ body.ui.dimmed.dimmable > :not(.dimmer){
   display: none;
 }
 .ui.dropdown .menu .item {
+  background-color: #000000;
   cursor: pointer;
   border: none;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
