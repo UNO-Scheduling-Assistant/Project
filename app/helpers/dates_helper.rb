@@ -23,20 +23,20 @@ module DatesHelper
     edy = get_day(params.end_date)
 
     cdate = {}
-    cdate[:start_date_year] = ["#{syr}", syr]
-    cdate[:start_date_month] = [Date.new(2001, smt, 1).strftime("%B"), smt]
-    cdate[:start_date_day] = ["#{sdy}", sdy]
+    cdate[:start_date_year] = syr
+    cdate[:start_date_month] = smt
+    cdate[:start_date_day] = sdy
 
-    cdate[:end_date_year] = ["#{eyr}", eyr]
-    cdate[:end_date_month] = [Date.new(2001, emt, 1).strftime("%B"), emt]
-    cdate[:end_date_day] = ["#{edy}", edy]
+    cdate[:end_date_year] = eyr
+    cdate[:end_date_month] = emt
+    cdate[:end_date_day] = edy
 
     params[:course_date] = cdate
     params
   end
 
   def get_date(date)
-    Date.strptime(date, '%d/%m/%Y')
+    Date.strptime(date, '%m/%d/%Y')
   end
 
   def get_year(date)

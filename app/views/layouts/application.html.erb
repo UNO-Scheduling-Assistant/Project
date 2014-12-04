@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<!--<p class="flash"><%= flash.notice %></p>-->
+
 <div class="ui large inverted black menu absolute top">
 	<div class="item uno"></div>
 	<%= link_to controller: :home, action: :index do %>
@@ -59,6 +59,7 @@
 		</div>
 	</div>
 </div>
+<p class="flash"><%= flash.notice %></p>
 <div class="scroll-box page-height">
 <div class="content">
 	<div>

@@ -1,4 +1,4 @@
-class CourseDatesController < ApplicationController
+class DatesController < ApplicationController
   include DatesHelper
   include ApplicationHelper
   def new
@@ -31,6 +31,8 @@ class CourseDatesController < ApplicationController
     @day_hash = get_day_hash
 
     params = split_date_params(@date)
+
+    # Set in view the default values.
   end
 
   def update

@@ -7,8 +7,9 @@ class RoomsController < ApplicationController
   end
 
   def create
-    valid = Room.create(room_params).valid?
-    flash.notice = (valid ? "Room created successfuly" : "Room not created: Invalid")
+    @room = Room.new(room_params)
+    valid = @room.save
+    flash.notice = (valid ? "Room created successfuly" : "Room not created: #{errors(@room)}")
     redirect_to (valid ? rooms_path : new_room_path)
   end
 
@@ -24,9 +25,10 @@ class RoomsController < ApplicationController
 
   def update
     @room = Room.find(params[:id])
-    @room.update(room_params)
+    valid = @room.update(room_params)
 
-    redirect_to rooms_path
+    flash.notice = (valid ? "Room updated successfuly" : "Room not updated: #{@room.errors.full_messages[0]}")
+    redirect_to (valid ? rooms_path : edit_room_path(params[:id]))
   end
 
   def destroy

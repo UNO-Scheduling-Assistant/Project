@@ -35,6 +35,12 @@ module ApplicationHelper
     time_conv(time).min
   end
 
+  def errors(record)
+    out = ""
+    record.errors.full_messages.each_with_index { |message, i| out << (i > 0 ? "; " : "") << message }
+    out
+  end
+
   private
 
   def time_conv(time)

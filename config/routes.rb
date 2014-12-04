@@ -7,6 +7,7 @@ CourseSchedulingAssistant::Application.routes.draw do
   resources :times
   resources :instructors
   resources :course_dates
+  resources :dates
 
   # You can have the root of your site routed with "root"
    root 'home#index'
