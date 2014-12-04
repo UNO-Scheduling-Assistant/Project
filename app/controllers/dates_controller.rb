@@ -1,2 +1,0 @@
-class DatesController < ApplicationController
-end

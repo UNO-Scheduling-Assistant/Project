@@ -1,0 +1,21 @@
+<%= form_for(@date) do |f| %>
+	<p>
+		<%= f.label :start_date %>
+	</p>
+	<p>
+		<%= select_tag(:start_date_year, options_for_select(@year_hash)) %>
+		<%= select_tag(:start_date_month, options_for_select(@month_hash)) %>
+		<%= select_tag(:start_date_day, options_for_select(@day_hash)) %>
+	</p>
+	<p>
+		<%= f.label :end_date %>
+	</p>
+	<p>
+		<%= select_tag(:end_date_year, options_for_select(@year_hash)) %>
+		<%= select_tag(:end_date_month, options_for_select(@month_hash)) %>
+		<%= select_tag(:end_date_day, options_for_select(@day_hash)) %>
+	</p>
+	<p>
+		<%= f.submit %>
+	</p>
+<% end %>
