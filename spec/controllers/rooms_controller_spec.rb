@@ -1,25 +1,27 @@
 require 'spec_helper'
 
-def create_params(params)
-  final_par = {building: "", room_num: "", room_capacity: "", desk_type: "", chair_type: "", board_type: ""}
+module RoomParams
+  def self.create_params(params)
+    final_par = {building: "", room_num: "", room_capacity: "", desk_type: "", chair_type: "", board_type: ""}
 
-  params.each { |key, val| final_par[key] = val }
+    params.each { |key, val| final_par[key] = val }
 
-  final_par
+    final_par
+  end
 end
 
 describe RoomsController do
-  
+
   describe "POST create" do
     it "redirects to new if input is invalid" do
-      params = create_params(room_capacity: -3)
+      params = RoomParams.create_params(room_capacity: -3)
       post :create, room: params 
       expect(response).to redirect_to(new_room_path)
     end
 
     context "if successful," do
       #params = {building: "PKI", room_num: 123, room_capacity: 3, desk_type: "", chair_type: "", board_type: ""}
-      params = create_params(building: "PKI", room_num: 123, room_capacity: 3)
+      params = RoomParams.create_params(building: "PKI", room_num: 123, room_capacity: 3)
       it "redirects to index" do
         post :create, room: params
         expect(response).to redirect_to(rooms_path)
@@ -42,17 +44,17 @@ describe RoomsController do
 
   describe "PATCH update" do
     it "redirects to edit if input is invalid" do
-      params = create_params(room_num: 255, building: "PKI")
+      params = RoomParams.create_params(room_num: 255, building: "PKI")
       room = Room.create(params)
       params[:id] = room.id
       params[:room_num] = -32
 
       patch :update, id: params[:id], room: params
-      expect(response).to redirect_to(new_room_path)
+      expect(response).to redirect_to(edit_room_path(room.id))
     end
 
     context "if successful," do
-      params = create_params(building: "PKI", room_num: 325, room_capacity: 1)
+      params = RoomParams.create_params(building: "PKI", room_num: 325, room_capacity: 1)
       Room.create(params)
       params[:id] = Room.where(params)[0].id
       params[:room_capacity] = 20

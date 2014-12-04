@@ -8,9 +8,12 @@ class CoursesController < ApplicationController
 
   def create
     @course = Course.new(course_params)
-    @course.save
+    valid = @course.save
 
-    redirect_to courses_path
+    
+    #flash.notice = (valid ? "Course created successfully" : "Instructor not created: #{errors(@course)}")
+    flash.notice = cu_flash(val: valid, action: 'created', model: "Course", record: @course)
+    redirect_to (valid ? courses_path : new_course_path)
   end
 
   def index
@@ -24,13 +27,15 @@ class CoursesController < ApplicationController
 
   def update
     @course = Course.find(params[:id])
-    @course.update(course_params)
+    valid = @course.update(course_params)
 
-    redirect_to courses_path
+    flash.notice = cu_flash(val: valid, action: 'updated', model: "Course", record: @course)
+    redirect_to (valid ? courses_path : edit_course_path(params[:id]))
   end
 
   def destroy
     Course.find(params[:id]).destroy
+    flash.notice = d_flash("Course")
     redirect_to courses_path
   end
 end

@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+=begin
 def create_params(params)
   final_par = {start_time: "", end_time: ""}
 
@@ -38,3 +38,4 @@ describe TimesController do
     end
   end
 end
+=end

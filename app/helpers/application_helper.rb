@@ -35,15 +35,33 @@ module ApplicationHelper
     time_conv(time).min
   end
 
-  def errors(record)
-    out = ""
-    record.errors.full_messages.each_with_index { |message, i| out << (i > 0 ? "; " : "") << message }
-    out
+  
+
+  def cu_flash(params)
+    "#{params[:model]} " << (params[:val] ?  cu_success(params) : cu_fail(params))
+  end
+
+  def d_flash(name)
+    "#{name} successfully destroyed"
   end
 
   private
 
   def time_conv(time)
     Time.strptime(time, "%I:%M:%S %P")
+  end
+
+  def cu_success(params)
+    "#{params[:action]} successfully!"
+  end
+
+  def cu_fail(params)
+    "not #{params[:action]}: #{errors(params[:record])}"
+  end
+
+  def errors(record)
+    out = ""
+    record.errors.full_messages.each_with_index { |message, i| out << (i > 0 ? "; " : "") << message }
+    out
   end
 end

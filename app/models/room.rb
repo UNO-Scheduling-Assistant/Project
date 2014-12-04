@@ -31,6 +31,12 @@
 # Section
 
 class Room < ActiveRecord::Base
+
+  def initialize(params=nil)
+    return super if params.nil?
+    params[:room_capacity] = 0 if params[:room_capacity].nil? || params[:room_capacity].to_s.empty?
+    super(params)
+  end
   class RoomValidator < ActiveModel::Validator
     def nnil(num)
       num.nil? ? 0.1 : num

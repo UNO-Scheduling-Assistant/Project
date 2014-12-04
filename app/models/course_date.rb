@@ -30,6 +30,46 @@
 class CourseDate < ActiveRecord::Base
 	#self.primary_keys = :year, :semester
 	
-	has_many :section_settings
+	class CourseDateValidator < ActiveModel::Validator
+    
+    def date_valid?(date)
+      begin 
+        Date.strptime(date, "%m/%d/%Y")
+      rescue
+        return false
+      end
+      true
+    end
 
+    def date_values(date)
+      date =~ /(\d+)\/(\d+)\/(\d+)/
+
+      year = $3.nil? ? 0 : $3
+      month = $1.nil? ? 0 : $1
+      day = $2.nil? ? 0 : $2
+
+      "#{year}#{sprintf("%02d", month)}#{sprintf("%02d", day)}".to_i
+    end
+
+    def std_lt_edd_validate(r)
+      r.errors[:base] << "Start date must be before end date" if date_values(r.start_date) >= date_values(r.end_date)
+    end
+
+    def std_validate(r)
+      r.errors[:base] << "Start date invalid" unless date_valid?(r.start_date)
+    end
+
+    def edd_validate(r)
+      r.errors[:base] << "End date invalid" unless date_valid?(r.end_date)
+    end
+
+    def validate(record)
+      std_validate(record)
+      edd_validate(record)
+      std_lt_edd_validate(record)
+    end
+	end
+
+	has_many :section_settings
+	validates_with CourseDateValidator
 end

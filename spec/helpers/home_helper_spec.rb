@@ -105,7 +105,7 @@ describe HomeHelper do
     end
 
     it "course_date" do
-      test_no_dep_write_func({start_date: "2014-03-03", end_date: "2015-03-03"}, CourseDate, :write_course_date)
+      test_no_dep_write_func({start_date: "3/3/2014", end_date: "3/3/2015"}, CourseDate, :write_course_date)
     end
 
     it "room" do
@@ -117,7 +117,7 @@ describe HomeHelper do
     end
 
     it "section_setting" do
-      hash = {first_name: "Joe", last_name: "Lancelot", days: "M", start_time: "5:50:00 PM", end_time: "6:50:00 PM", start_date: "2014-01-01", end_date: "2014-06-06", building: "PKI", room_num: 270}
+      hash = {first_name: "Joe", last_name: "Lancelot", days: "M", start_time: "5:50:00 PM", end_time: "6:50:00 PM", start_date: "1/1/2014", end_date: "6/6/6666", building: "PKI", room_num: 270}
       id = write_section_setting(convert_hash(hash))
       expect(id).to eq(1)
     end

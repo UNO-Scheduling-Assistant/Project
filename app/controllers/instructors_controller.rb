@@ -7,8 +7,10 @@ class InstructorsController < ApplicationController
   end
 
   def create
-    valid = Instructor.create(instructor_params).valid?
-    flash.notice = (valid ? "Instructor created successfuly" : "Instructor not created: Invalid")
+    @instructor = Instructor.new(instructor_params)
+    valid = @instructor.save
+    flash.notice = cu_flash(val: valid, action: 'created', model: "Instructor", record: @instructor)
+   # flash.notice = (valid ? "Instructor created successfully" : "Instructor not created: #{errors(@instructor)}")
     redirect_to (valid ? instructors_path : new_instructor_path)
   end
 
@@ -24,13 +26,16 @@ class InstructorsController < ApplicationController
 
   def update
     @instructor = Instructor.find(params[:id])
-    @instructor.update(instructor_params)
+    valid = @instructor.update(instructor_params)
 
-    redirect_to instructors_path
+    flash.notice = cu_flash(val: valid, action: 'updated', model: "Instructor", record: @instructor)
+    #flash.notice = (valid ? "Instructor updated successfully" : "Instructor not updated: #{errors(@instructor)}")
+    redirect_to (valid ? instructors_path : new_instructor_path)
   end
 
   def destroy
     Instructor.find(params[:id]).destroy
+    flash.notice = d_flash("Instructor")
     redirect_to instructors_path
   end
 end

@@ -41,7 +41,7 @@
 class Section < ActiveRecord::Base
 
   # Initializes default values
-  def initialize(params)
+  def initialize(params=nil)
 
     # === Params
     # what - a parameter hash value
@@ -62,6 +62,7 @@ class Section < ActiveRecord::Base
       (is_str_empty?(what) || what.nil?) ? val : what
     end
 
+    return super if params.nil?
     params[:session] = default_val(params[:session], 1)
     params[:sec_id] = default_val(params[:sec_id], 1)
     params[:sec_capacity] = default_val(params[:sec_capacity], 0)
