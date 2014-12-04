@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   include HomeHelper
 
   def index
-
+    redirect_to controller: :home, action: :list
   end
 
   def import

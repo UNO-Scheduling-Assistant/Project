@@ -25,6 +25,19 @@ body
 	margin:0;
 }
 
+.scroll-box
+{
+	width: 100%;
+	overflow: auto;
+}
+
+.page-height
+{
+	position: absolute;
+	bottom: 0;
+	top: 8.2em;
+}
+
 .ui a
 {
 	text-decoration: none;
@@ -86,4 +99,10 @@ body .content a:hover
 .label
 {
 	font-size:1.75rem !important;
+}
+
+.content { font-family: sans-serif;}
+.content h1
+{
+	letter-spacing: 0.14em;
 }
