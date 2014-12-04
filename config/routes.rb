@@ -5,6 +5,9 @@ CourseSchedulingAssistant::Application.routes.draw do
   resources :rooms
   resources :courses
   resources :times
+  resources :instructors
+  #resources :dates
+
   # You can have the root of your site routed with "root"
    root 'home#index'
    get 'import' => 'home#import'

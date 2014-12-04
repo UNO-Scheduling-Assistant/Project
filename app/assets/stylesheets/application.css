@@ -25,13 +25,18 @@ body
 	margin:0;
 }
 
-body a
+.ui a
+{
+	text-decoration: none;
+}
+
+body .content a
 {
 	color: #c01010;
 	text-decoration: none;
 }
 
-body a:hover
+body .content a:hover
 {
 	color: #000000;
 	font-weight: bold;

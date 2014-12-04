@@ -10,27 +10,50 @@
 <!--<p class="flash"><%= flash.notice %></p>-->
 <div class="ui large inverted black menu absolute top">
 	<div class="item uno"></div>
-	<div class="item label">UNO Course Scheduling Assistant</div>
+	<%= link_to controller: :home, action: :index do %>
+		<div class="item label">UNO Course Scheduling Assistant</div>
+	<% end %>
 </div>
 <div class="ui grey menu">
 	<div class="ui simple dropdown item">Manage
 		<div class="menu">
-			<div class="item">Courses</div>
-			<div class="item">Rooms</div>
-			<div class="item">Instructors</div>
+			<%= link_to courses_path do %>
+				<div class="item">Courses</div>
+			<% end %>
+			<%= link_to rooms_path do %>
+				<div class="item">Rooms</div>
+			<% end %>
+			<%= link_to instructors_path do %>
+				<div class="item">Instructors</div>
+			<% end %>
 			<div class="item">Times</div>
 		</div>
 	</div>
 	<div class="ui simple dropdown item">Schedule
 		<div class="menu">
-			<div class="item">Display Schedule</div>
-			<div class="item">Import</div>
-			<div class="item">Export</div>
-			<div class="item">Purge All</div>
+			<%= link_to controller: :home, action: :list do %>
+				<div class="item">Display Schedule</div>
+			<% end %>
+			<%= link_to controller: :home, action: :import do %>
+				<div class="item">Import</div>
+			<% end %>
+			<%= link_to controller: :home, action: :index do %>
+				<div class="item">Export</div>
+			<% end %>
+
+			<%= link_to({controller: 'home', action: 'delete_all'}, confirm: "WARNING: All data will be DESTROYED. The consequences will never be the same!  Proceed?", method: 'delete') do %>
+				<div class="item">Purge All</div>
+			<% end %>
 		</div>
 	</div>
 	<div class="ui simple dropdown item">Reports
 		<div class="menu">
+			<%= link_to controller: :home, action: :index do %>
+				<div class="item">Room Report</div>
+			<% end %>
+			<%= link_to controller: :home, action: :index do %>
+				<div class="item">Instructor Report</div>
+			<% end %>
 		</div>
 	</div>
 </div>
