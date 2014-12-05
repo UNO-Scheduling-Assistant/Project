@@ -19,8 +19,8 @@ class DatesController < ApplicationController
   end
 
   def create
-    start_date = get_sdate(params)
-    end_date = get_edate(params)
+    start_date = (params[:start_date].nil? ? get_sdate(params) : params[:start_date])
+    end_date = (params[:end_date].nil? ? get_edate(params) : params[:end_date])
 
     @date = CourseDate.new(start_date: start_date, end_date: end_date)
     valid = @date.save
@@ -58,8 +58,8 @@ class DatesController < ApplicationController
   end
 
   def update
-    start_date = get_sdate(params)
-    end_date = get_edate(params)
+    start_date = (params[:start_date].nil? ? get_sdate(params) : params[:start_date])
+    end_date = (params[:end_date].nil? ? get_edate(params) : params[:end_date])
 
     @date = CourseDate.find(params[:id])
     
