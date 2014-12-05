@@ -23,20 +23,15 @@ module DatesHelper
     edy = get_day(params.end_date)
 
     cdate = {}
-    cdate[:start_date_year] = syr
-    cdate[:start_date_month] = smt
-    cdate[:start_date_day] = sdy
+    cdate[:start_date_year] = get_num_hash(syr)
+    cdate[:start_date_month] = get_num_hash(smt)
+    cdate[:start_date_day] = get_num_hash(sdy)
 
-    cdate[:end_date_year] = eyr
-    cdate[:end_date_month] = emt
-    cdate[:end_date_day] = edy
+    cdate[:end_date_year] = get_num_hash(eyr)
+    cdate[:end_date_month] = get_num_hash(emt)
+    cdate[:end_date_day] = get_num_hash(edy)
 
-    params[:course_date] = cdate
-    params
-  end
-
-  def get_date(date)
-    Date.strptime(date, '%m/%d/%Y')
+    cdate
   end
 
   def get_year(date)
@@ -62,4 +57,15 @@ module DatesHelper
   def get_sedate(params, using)
     "#{params[using[:mt]]}/#{sprintf("%d", params[using[:dy]])}/#{sprintf("%d", params[using[:yr]])}"
   end
+
+  private
+
+  def get_date(date)
+    Date.strptime(date, '%m/%d/%Y')
+  end
+
+  def get_num_hash(val)
+    ["#{val}", val]
+  end
+
 end
