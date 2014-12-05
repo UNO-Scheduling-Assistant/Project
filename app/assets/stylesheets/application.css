@@ -35,7 +35,31 @@ body
 {
 	position: absolute;
 	bottom: 1.2em;
-	top: 8.2em;
+	top: 10.2em;
+}
+
+.page-option-container
+{
+	position: absolute;
+	top: 7.9em;
+	height: 2em;
+	width: 100%;
+
+	border-top-width: 0.3em;
+	border-top-color: #999999;
+	border-top-style: solid;
+
+	background-color: #000000;
+}
+
+#page-title
+{
+	clear: left;
+	font-family: sans-serif;
+	color: #ffffff;
+	font-size: 1.1em;
+	margin-top: 0.2em;
+	margin-left: 0.3em;
 }
 
 .ui a
@@ -55,9 +79,6 @@ body
 	color: #FFFFFF;
 
 	background-color: #000000;
-
-
-
 }
 
 body .content a
