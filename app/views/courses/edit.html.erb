@@ -1,2 +1,5 @@
-<h1>Edit Course</h1>
+<script>
+	changePageBarTitle('Editing Course <%= @course.subject %> <%= @course.course_id %>');
+	clearLinks();
+</script>
 <%= render partial: 'form' %>

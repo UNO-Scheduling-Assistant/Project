@@ -1,2 +1,5 @@
-<h1>Edit Room </h1>
+<script>
+	changePageBarTitle('Editing Course Date <%= @date.start_date %> -- <%= @date.end_date %>');
+	clearLinks();
+</script>
 <%= render partial: 'form' %>

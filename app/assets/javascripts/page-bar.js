@@ -3,7 +3,8 @@ var pb_title = "#page-title"
 
 function changePageBarTitle(title)
 {
-	$(pb_title).text(title);
+	var new_title = replace(title, '&amp;', '&');
+	$(pb_title).text(new_title);
 }
 
 function clearLinks()

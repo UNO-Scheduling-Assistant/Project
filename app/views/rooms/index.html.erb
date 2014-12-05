@@ -1,7 +1,9 @@
-
+<script>
+  changePageBarTitle("Room List");
+  clearLinks();
+  addLink('<%= link_to "New Room", new_room_path %>');
+</script>
 <table class="list-table">
-  <tr>
-    <td colspan="9"><%= link_to "New Room", new_room_path %></td>
   <tr class="table-heading">
     <th>Building</th>
     <th>Room Number</th>

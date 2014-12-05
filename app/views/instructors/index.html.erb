@@ -1,7 +1,9 @@
-
+<script>
+  changePageBarTitle("Instructor List");
+  clearLinks();
+  addLink('<%= link_to "New Instructor", new_instructor_path %>');
+</script>
 <table class="list-table">
-  <tr>
-    <td colspan="9"><%= link_to "New Instructor", new_instructor_path %></td>
   <tr class="table-heading">
     <th>Name</th>
     <th>Edit</th>
