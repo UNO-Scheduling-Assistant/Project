@@ -15,7 +15,7 @@ class DatesController < ApplicationController
     @date = CourseDate.new(start_date: start_date, end_date: end_date)
     @date.save
     
-    redirect_to course_dates_path
+    redirect_to dates_path
   end
 
   def index
