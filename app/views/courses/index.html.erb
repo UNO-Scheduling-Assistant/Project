@@ -1,3 +1,10 @@
+<script>
+  changePageBarTitle("Courses");
+
+  clearLinks();
+  addLink('<%= link_to "New Course", new_course_path %>');
+</script>
+
 <% if false %>
 <table class="list-table">
   <tr>
@@ -22,8 +29,6 @@
   <% end %>
 </table>
 <%end%>
-
-<%= link_to "New Course", new_course_path %>
 
 <div class="course-container">
   <div class="course-info">
