@@ -17,7 +17,7 @@ module HomeHelper
   def put_row_into_database(row)
     write_section(row, write_course(row))
 
-    sleep(0.01)
+    sleep(0.0001)
   end
 
   def write_section(row, course)

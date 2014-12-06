@@ -52,15 +52,18 @@ class TimeSlot < ActiveRecord::Base
     end
 
     def start_time_gt_end_time?(r)
+      return false if r.start_time.nil? || r.end_time.nil?
       (hour(r.start_time) > hour(r.end_time)) ||
       (hour(r.start_time) == hour(r.end_time) && minute(r.start_time) >= minute(r.end_time))
     end
 
     def days_correct?(r)
-      r.days =~ /[MTWRFS]+/
+      r.days.nil? || r.days =~ /[MTWRFS]+/
     end
 
     def validate(record)
+      return if (record.days.nil? && record.start_time.nil? && record.end_time.nil?)
+
       cond_error(record, start_time_gt_end_time?(record), "Start time is greater than end time")
       cond_error(record, !is_correct_format?(record), "Incorrect time format")
       cond_error(record, !days_correct?(record), "Incorrect day(s)")

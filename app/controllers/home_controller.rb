@@ -26,9 +26,7 @@ class HomeController < ApplicationController
   end
 
   def delete_all
-    Section.destroy_all
     Course.destroy_all
-    SectionSetting.destroy_all
     TimeSlot.destroy_all
     Instructor.destroy_all
     Room.destroy_all

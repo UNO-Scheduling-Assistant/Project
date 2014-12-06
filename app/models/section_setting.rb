@@ -42,4 +42,16 @@ class SectionSetting < ActiveRecord::Base
 	belongs_to  :room
 	belongs_to  :course_date
 	#belongs_to  :course_date, primary_key: "semester", foreign_key: "semester"
+
+	before_destroy { destruct }
+
+	def destruct
+		if time_slot.section_settings.count == 1
+			time_slot.destroy
+		end
+
+		if course_date.section_settings.count == 1
+			course_date.destroy
+		end
+	end
 end

@@ -75,12 +75,10 @@ class Section < ActiveRecord::Base
   # Checks its section setting and finds out how many sections it has.  
   # If it has only one, delete the section setting.  
   # Then delete the section.
-  def destroy
+  def destruct
     if section_setting.sections.count == 1
       section_setting.destroy
     end
-
-    super.destroy
   end
 
   # Validator for Section
@@ -103,6 +101,8 @@ class Section < ActiveRecord::Base
       cond_error(record, (vnil(record.session) <= -1), "Negative session")
     end
   end
+
+  before_destroy { destruct }
 
   belongs_to :course
   belongs_to :section_setting
