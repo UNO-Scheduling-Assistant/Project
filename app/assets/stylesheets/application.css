@@ -111,7 +111,7 @@ body .content a
 	text-decoration: none;
 }
 
-body .content a:hover
+body.content a:hover
 {
 	color: #000000;
 	font-weight: bold;

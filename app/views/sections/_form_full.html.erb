@@ -1,0 +1,46 @@
+<script>
+$(document).ready(function()
+{
+  $('input:radio').click(function()
+  {
+    $.ajax(
+    {
+      url: "<%= update_room_list_sections_path %>",
+      data: {
+        desk: $("input:radio[name=desk]:checked").val(),
+        chair: $("input:radio[name=chair]:checked").val(),
+        board: $("input:radio[name=board]:checked").val()
+      },
+      dataType: "script"
+    });
+
+  });
+
+});
+</script>
+
+<%= form_for @section, url: {controller: 'sections', action: @action} do %>
+
+<div class= "sec-form">
+	<div class="block">
+    <div class="type">
+      <%= render 'sections/pieces/room/type_option', type: :board %>
+    </div>
+
+    <div class="type">
+      <%= render 'sections/pieces/room/type_option', type: :desk %>
+    </div>
+
+    <div class="type">
+      <%= render 'sections/pieces/room/type_option', type: :chair %>
+    </div>
+  </div>
+
+  <div class="block">
+    <div id="room">
+      <%= render 'sections/pieces/room/room_num', rooms: @rooms %>
+    </div>
+  </div>
+</div>
+
+<% end %>

@@ -1,0 +1,10 @@
+	<% @room_props[type].each do |p| %>
+	<div>
+		<% if p.nil? %>
+		<%= radio_button_tag(type, p, checked: true) %>
+		<% else %>
+		<%= radio_button_tag(type, p) %>
+		<% end %>
+		<%= label_tag(p, (p.nil? ? "Don't care" : p)) %>
+	</div>
+	<% end %>

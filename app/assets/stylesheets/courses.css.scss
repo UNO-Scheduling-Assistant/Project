@@ -98,6 +98,9 @@
 	display: inline-block;
 	width: 100%;
 
+	padding-top: 0.1em;
+	padding-bottom: 0.1em;
+
 	border-bottom-width: 1px;
 	border-bottom-color: #eac8c8;
 	border-bottom-style: solid;
@@ -123,6 +126,8 @@ a:hover .section-row
 {
 	font-weight: normal !important;
 	text-decoration: none !important;
+//	margin: 0;
+//	padding: 0;
 }
 
 .sel-rt

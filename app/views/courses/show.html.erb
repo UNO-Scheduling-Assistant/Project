@@ -59,10 +59,12 @@
         <%= section.sec_description %>
       </div>
       <div class="course-options">
-        <%= link_to "Edit", edit_section_path(section) %>
+        
         <%= link_to "Comb", combine_section_path(section) %>
         <%= link_to "Add Inst", add_instructor_section_path(section) %>
         <%= link_to "Cross", cross_section_path(section) %>
+        <%= link_to "Edit", edit_section_path(section) %>
+        <%= link_to "Delete", section_path(section), method: :delete, data: {confirm: "Are you sure you want to delete this section?"} %>
       </div>
     </div>
   </div>
