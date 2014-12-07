@@ -9,7 +9,8 @@ $(document).ready(function()
       data: {
         desk: $("input:radio[name=desk]:checked").val(),
         chair: $("input:radio[name=chair]:checked").val(),
-        board: $("input:radio[name=board]:checked").val()
+        board: $("input:radio[name=board]:checked").val(),
+        disabled: "<%= @disabled[:room] %>"
       },
       dataType: "script"
     });

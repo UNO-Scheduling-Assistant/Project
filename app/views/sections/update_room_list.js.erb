@@ -1,2 +1,3 @@
-
-$('#room').html('<%= escape_javascript(render partial: "sections/pieces/room/room_num", locals: {rooms: @new_rooms}) %>');
+<% if @disabled.eql?("false") %>
+$('#room').html('<%= escape_javascript(render partial: "sections/pieces/room/room_num", locals: {rooms: @new_sets[:rooms], disabled: false}) %>');
+<% end %>
