@@ -11,6 +11,7 @@
 {
 	display: inline-block;
 	min-height: 3%;
+	float: none;
 }
 
 .right
@@ -28,6 +29,7 @@
 	float: left;
 	min-width: 5%;
 	height: 100%;
+	display: block;
 }
 
 fieldset
@@ -43,6 +45,7 @@ fieldset
 .block div
 {
 	min-width: 5%;
+
 }
 .sec-time
 {

@@ -1,12 +1,15 @@
 <%= field_set_tag "Times" do %>
-
+<div>
 <div class="block">
+	<%= render 'sections/pieces/time/days' %>
+</div>
+
+<div class="clear">
+	<%= render 'sections/pieces/time/timeset', time: :start %>
 </div>
 
 <div class="block">
+	<%= render 'sections/pieces/time/timeset', time: :end %>
 </div>
-
-<div class="block">
 </div>
-
 <% end %>
