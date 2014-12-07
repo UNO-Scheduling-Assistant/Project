@@ -8,6 +8,9 @@ class SectionsController < ApplicationController
   def combine
   end
 
+  def add_instructor
+  end
+
   def create
     valid = Section.create(section_params).valid?
     flash.notice = (valid ? "Section created successfuly" : "Section not created: Invalid")

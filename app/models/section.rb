@@ -155,4 +155,24 @@ class Section < ActiveRecord::Base
     
     Section.joins(:course, section_setting: [:instructor, :time_slot, :room, :course_date]).select(report_query)
   end
+
+  def room_s
+    "#{self.section_setting.room.building}#{self.section_setting.room.room_num}" unless self.section_setting.room.nil?
+  end
+
+  def time_s
+    "#{self.section_setting.time_slot.days}   #{self.section_setting.time_slot.start_time}  -  #{self.section_setting.time_slot.end_time}" unless self.section_setting.time_slot.nil?
+  end
+
+  def instructor_s
+    "#{self.section_setting.instructor.last_name}, #{self.section_setting.instructor.first_name}" unless self.section_setting.instructor.nil?
+  end
+
+  def date_s
+    "#{self.section_setting.course_date.start_date} -- #{self.section_setting.course_date.end_date}" unless self.section_setting.course_date.nil?
+  end
+
+  def course_id_s
+    "#{self.course.subject} #{self.course.course_id}-#{sprintf("%03d", self.sec_id)}"
+  end
 end

@@ -75,8 +75,10 @@
 {
 	min-height: 5em;
 	background-color: #f4d2d2;
-	font-family: sans-serif;
+	//font-family: sans-serif;
 	//color: #551111;
+	margin-bottom: 1.2em;
+	margin-top: -0.1em;
 }
 
 .alrt { float: right; }
@@ -89,9 +91,74 @@
 .rmargin { margin-right: 0em; }
 .mbot { margin-bottom: 0.4em; }
 .rtalign { text-align: right;}
+
+.section-row
+{
+	height: 1.2em;
+	display: inline-block;
+	width: 100%;
+
+	border-bottom-width: 1px;
+	border-bottom-color: #eac8c8;
+	border-bottom-style: solid;
+}
+
+.sec-element
+{
+	font-family: sans-serif;
+	color: #441111;
+}
+
+.sel-lt
+{
+	float: left;
+
+	font-weight: bold;
+
+	margin-left: 1em;
+	width: 30%;
+}
+
+.sel-rt
+{
+	float: left;
+	width: 60%;
+
+}
+
+.sec-comb
+{
+	background-color: #ffdddd;
+	margin-bottom: 0.08em;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+	width: 100%;
+
+	font-family: sans-serif;
+	font-size: 1em;
+	letter-spacing: 0.1em;
+	color: #e3a1a1;
+
+	border-top: 0.2em;
+	border-top-style: solid;
+	border-top-color: #e3c1c1;
+
+	border-bottom: 0.2em;
+	border-bottom-style: solid;
+	border-bottom-color: #e3c1c1;
+}
+
+.sec-comb div
+{
+	margin-left: 1em;
+}
+
 .section-divider
 {
-	height: 1px;
+	height: 2px;
 	width: 100%;
 	background-color: #e3c1c1;
+
+	margin-top: -3px;
+	margin-bottom: 0.7em;
 }

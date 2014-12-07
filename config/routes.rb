@@ -9,6 +9,13 @@ CourseSchedulingAssistant::Application.routes.draw do
   resources :course_dates
   resources :dates
 
+  resources :sections do
+    get 'combine', on: :member
+    get 'cross', on: :member
+    get 'add_instructor', on: :member
+    get 'new/:course_id', to: 'sections#new', on: :collection, as: :new
+  end
+
   # You can have the root of your site routed with "root"
    root 'home#index'
    get 'import' => 'home#import'
