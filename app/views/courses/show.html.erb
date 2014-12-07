@@ -4,61 +4,16 @@
   addLink('<%= link_to "New Section", new_sections_path(@course) %>')
 </script>
 
-<% if false %>
-<div class="course-container">
-  <div class="course-info">
-    <div class="subject-catalog">
-      <%= @course.subject %> <%= @course.course_id %>
-    </div>
-    <div class="course-name">
-      <%= @course.name %>
-    </div>
-  </div>
-  <div class="sections-container">
-    <% @sections.each_with_index do |section, i| %>
-      <div class="section-row full">
-        <div id="sec-id-row" class="inblk full mbot">
-          <div class="allt half lmargin">
-            Section: <%= @course.subject %> <%= @course.course_id %>-<%= sprintf("%03d", section.sec_id) %>
-          </div>
-          <div class="alrt half rmargin rtalign">
-            Description: <%= section.sec_description %>
-          </div>
-        </div>
-        <div id="room-time-row" class="inblk full mbot">
-          <div id="col-room" class="allt quart lmargin">
-            Room: <%= section.section_setting.room.building %> <%= section.section_setting.room.room_num %>
-          </div>
-          <div id="col-time" class="allt quart">
-            Time: <%= section.section_setting.time_slot.days %> <%= section.section_setting.time_slot.start_time %> to <%= section.section_setting.time_slot.end_time %>
-          </div>
-          <div id="col-inst" class="alrt half rmargin rtalign">
-            Instructor: <%= section.section_setting.instructor.first_name %> <%= section.section_setting.instructor.last_name %>
-          </div>
-        </div>
-        <div id="seats-row" class="inblk full mbot">
-          <div id="col-seats" class="allt quart lmargin">
-            Seats: <%= section.sec_capacity %>
-          </div>
-        </div>
-      </div>
-      <div class="section-divider"></div>
-    <% end %>
-  </div>
-</div>
-
-<% end %>
-
 <% @sections.each_with_index do |section, i | %>
   <div class="course-container">
-    <div class="course-info">
-      <div class="subject-catalog course-header-text">
+    <div class="course-info-inverted">
+      <div class="subject-catalog course-header-text cht-inv">
         <%= @course.subject %> <%= @course.course_id %>-<%= sprintf("%03d", section.sec_id) %>
       </div>
-      <div class="course-name course-header-text">
+      <div class="course-name course-header-text cht-inv">
         <%= section.sec_description %>
       </div>
-      <div class="course-options">
+      <div class="course-options coa-inv">
         
         <%= link_to "Comb", combine_section_path(section) %>
         <%= link_to "Add Inst", add_instructor_section_path(section) %>

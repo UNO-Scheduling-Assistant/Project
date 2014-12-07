@@ -5,31 +5,6 @@
   addLink('<%= link_to "New Course", new_course_path %>');
 </script>
 
-<% if false %>
-<table class="list-table">
-  <tr>
-    <td><%= link_to "New Course", new_course_path %></td>
-  <tr class="table-heading">
-    <th>Course Number</th>
-    <th>Course Name</th>
-    <th>Updated</th>
-    <th>Edit</th>
-    <th>Delete</th>
-  </tr>
-  <% @courses.each_with_index do |course, i| %>
-  <tr class=<%= @get_class.call(i) %>>
-    <td><%= course.subject%> <%= course.course_id %></td>
-    <td><%= course.name %></td>
-    <td><%= course.updated_at %></td>
-    <td><%= link_to "Edit", edit_course_path(course) %></td>
-    <td>
-        <%= link_to "Delete", course_path(course), method: :delete, data: {confirm: "Are you sure you want to delete this course?"} %>
-    </td>
-  </tr>
-  <% end %>
-</table>
-<%end%>
-
 <% @courses.each do |course| %>
 
 <div class="course-container" id='<%= course.id %>'>
@@ -42,7 +17,7 @@
       <%= course.name %>
     </div>
     <% end %>
-    <div class="course-options">
+    <div class="course-options coa">
       <%= link_to "Edit", edit_course_path(course) %>
       <%= link_to "Delete", course_path(course), method: :delete, data: {confirm: "Are you sure you want to delete this course?"} %>
     </div>
