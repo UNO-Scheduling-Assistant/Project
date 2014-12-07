@@ -119,6 +119,12 @@
 	width: 30%;
 }
 
+a:hover .section-row
+{
+	font-weight: normal !important;
+	text-decoration: none !important;
+}
+
 .sel-rt
 {
 	float: left;
@@ -155,10 +161,10 @@
 
 .section-divider
 {
-	height: 2px;
+	height: 3px;
 	width: 100%;
 	background-color: #e3c1c1;
 
-	margin-top: -3px;
-	margin-bottom: 0.7em;
+	margin-top: -4px;
+	margin-bottom: 0.23em;
 }

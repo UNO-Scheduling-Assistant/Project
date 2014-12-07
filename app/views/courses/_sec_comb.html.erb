@@ -4,7 +4,9 @@
 	</div>
 	<% section.section_setting.sections.each do |sec| %>
 		<% unless section == sec %>
-			<%= render 'sec_row', name: "#{sec.course_id_s}", value: "#{sec.course.name}" %>
+			<%= link_to(course_path(sec.course)) do %>
+				<%= render 'sec_row', name: "#{sec.course_id_s}", value: "#{sec.course.name}" %>
+			<% end %>
 		<% end %>
 	<% end %>
 <% end %>
