@@ -1,0 +1,23 @@
+<%= field_set_tag "Room" do %>
+<div>
+  <div class="block">
+    <div class="type">
+    <%= render 'sections/pieces/room/type_option', type: :board, name: "Board Type", disabled: disabled %>
+    </div>
+
+    <div class="type">
+      <%= render 'sections/pieces/room/type_option', type: :desk, name: "Desk Type", disabled: disabled %>
+    </div>
+
+    <div class="type">
+      <%= render 'sections/pieces/room/type_option', type: :chair, name: "Chair Type", disabled: disabled %>
+    </div>
+  </div>
+
+  <div class="clear">
+    <div id="room">
+      <%= render 'sections/pieces/room/room_num', rooms: @rooms, disabled: disabled %>
+    </div>
+  </div>
+</div>
+<% end %>

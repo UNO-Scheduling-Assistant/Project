@@ -10,13 +10,39 @@
 .block
 {
 	display: inline-block;
-	width: 100%;
+	min-height: 3%;
+}
+
+.right
+{
+	float: right;
+}
+
+.left
+{
+	float: left;
 }
 
 .block .type
 {
 	float: left;
-	width: 20%;
+	min-width: 5%;
+	height: 100%;
+}
+
+fieldset
+{
+	min-width: 2%;
+}
+
+.clear
+{
+	clear: both;
+}
+
+.block div
+{
+	min-width: 5%;
 }
 .sec-time
 {
