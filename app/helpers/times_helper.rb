@@ -66,4 +66,5 @@ module TimesHelper
     time = "#{params[using[:hr]]}:#{params[using[:min]]}:00 #{params[using[:per]]}"
 
   end
+
 end

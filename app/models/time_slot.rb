@@ -73,4 +73,44 @@ class TimeSlot < ActiveRecord::Base
 	has_many :section_settings
   validates_with TimeSlotValidator
 
+
+  def to_sec_hash
+    hash = {}
+    hash[:start] = {}
+    hash[:end] = {}
+
+    hash = sec_hash_days(hash)
+    hash = sec_hash_start(hash)
+    hash = sec_hash_end(hash)
+
+    hash
+  end
+
+  private
+
+  include ApplicationHelper
+
+  def sec_hash_days(hash)
+    day_hash = { "M" => :mon, "T" => :tue, "W" => :wed, "R" => :thu, "F" => :fri, "S" => :sat}
+
+    ["M", "T", "W", "R", "F", "S"].each { |d| hash[day_hash[d]] = true if self.days =~ /.*#{d}.*/ }
+
+    hash
+  end
+
+  def sec_hash_start(hash)
+    sec_hash_time(hash, :start, self.start_time)
+  end
+
+  def sec_hash_end(hash)
+    sec_hash_time(hash, :end, self.end_time)
+  end
+
+  def sec_hash_time(hash, pos, time)
+    hash[pos][:hour] = hour_murica(time)
+    hash[pos][:minute] = minute(time)
+    hash[pos][:period] = period_murica(time)
+
+    hash
+  end
 end

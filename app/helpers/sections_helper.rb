@@ -15,6 +15,21 @@ module SectionsHelper
     list
   end
 
+  def get_section_data(sets, sec)
+    sets[:course] = sec.course.to_arr_element
+    sets[:session] = sec.session
+    sets[:component] = sec.component
+    sets[:section] = sec.sec_id
+    sets[:class_nbr] = sec.class_num
+    sets[:room] = sec.section_setting.room.to_arr_element
+    sets[:instructor] = sec.section_setting.instructor.to_arr_element
+    sets[:time] = sec.section_setting.time_slot.to_sec_hash
+    sets[:sec_descr] = sec.sec_description
+
+    sets[:times][:end] = update_time(nil, :start)
+    sets
+  end
+
   def update_rooms(params=nil)
     rooms = Room.all
     room_list = []
@@ -92,7 +107,7 @@ module SectionsHelper
     puts ""
     print hash
     puts ""
-    return {period: default_element, hour: default_element, minute: default_element} if params.nil?
+    return {period: default_element, hour: default_element, minute: default_element, start: {}, end: {}} if params.nil?
 
     time[:period] = update_current_time_piece(params[:etime_p], hash[:times][:end][:period])
     time[:hour] = update_current_time_piece(params[:etime_h], hash[:times][:end][:hours])

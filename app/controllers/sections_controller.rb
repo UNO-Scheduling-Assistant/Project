@@ -40,6 +40,23 @@ class SectionsController < ApplicationController
   end
 
   def edit
+    @section = Section.find(params[:id])
+    @action = 'update'
+
+    @room_props = Room.all_room_props
+
+    @sets = get_option_list
+
+    @sets = get_section_data(@sets, @section)
+
+    @disabled = {}
+    @disabled[:room] = false
+    @disabled[:time] = false
+    @disabled[:instructor] = false
+    @disabled[:class_nbr] = false
+    @disabled[:course] = true
+    @disabled[:component] = false
+    @disabled[:session] = false
   end
 
   def update

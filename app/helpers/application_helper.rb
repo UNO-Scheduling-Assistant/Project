@@ -35,6 +35,14 @@ module ApplicationHelper
     time_conv(time).min
   end
 
+  def hour_murica(time)  # Fuck yeah!
+    time_conv(time).strftime("%I").to_i
+  end
+
+  def period_murica(time) # Fuck yeah?...
+    time_conv(time).strftime("%p")
+  end
+
   
 
   def cu_flash(params)
