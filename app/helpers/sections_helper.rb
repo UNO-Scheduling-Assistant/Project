@@ -1,4 +1,5 @@
 module SectionsHelper
+  include ApplicationHelper
   def get_option_list(params=nil)
     list = {}
     list[:rooms] = update_rooms(params) unless disabled(params, :room_disabled)
@@ -125,6 +126,7 @@ module SectionsHelper
     return false unless radio_button_good?(params[:chair], room.chair_type)
     return false unless radio_button_good?(params[:desk], room.desk_type)
 
+    time_conflicting = time_taken?(Room, room, params)
     #return false unless params[:board].nil? || params[:board].eql?("on") || room.board_type.eql?(params[:board])
    # return false unless params[:board]
    # puts "Must be true"
@@ -133,6 +135,45 @@ module SectionsHelper
 
   def radio_button_good?(param, checker)
     param.nil? || param.eql?("on") || checker.eql?(param)
+  end
+
+  # time_taken?
+  # Takes a room or instructor, and given the time parameters
+  # from the form, check against all times object currently has.
+  #
+  # Attack this problem like a bounding box collision detection type
+  # of problem.
+  #
+  # If any time is invalid, time is not taken, so return false
+  #
+  # We work in 24h format, since we are going to use the hour() and minute()
+  # methods from ApplicationHelper.
+  #
+  # Think of hours as X, and minutes as Y.  We multiply X by 60, and add it
+  # to Y.  This gives a low number, and a high number.  This is our time range.
+  #
+  # Before we compare the times, we take all the days that are checked.  If no days
+  # are checked, then we say time is not taken.  When we begin to iterate through
+  # the time slots, we check the days against our selected days.  If there is a one
+  # or more letter match, we test the times, otherwise we skip the entry.
+  #
+  # If one edge is in the other's range, time is taken
+  # If this above condition is false, we check the other side, time is taken if we have match
+  # If this is not true, then time is ultimately not taken for this value.
+  # return false
+  def time_taken?(model, ss_obj, params)
+    stime = time_format(params[:stime_h], params[:stime_m], params[:stime_p])
+    etime = time_format(params[:etime_h], params[:etime_m], params[:etime_p])
+
+    # Invalid time, do not care
+    return false if stime.nil? || etime.nil?
+
+  end
+
+  def time_format(hour, minute, period)
+    return nil if hour.empty? || minute.empty? || period.empty?
+
+    "#{hour}:#{sprintf("%02d", minute)}:00 #{period}"
   end
 
   def default_element
