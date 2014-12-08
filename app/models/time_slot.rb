@@ -31,8 +31,9 @@
 #
 # Section 
 class TimeSlot < ActiveRecord::Base
+
 	class TimeSlotValidator < ActiveModel::Validator
-		include ApplicationHelper
+	 include ApplicationHelper
 
     def cond_error(r, cond, error)
       if cond
@@ -70,6 +71,7 @@ class TimeSlot < ActiveRecord::Base
     end
   end
 
+
 	has_many :section_settings
   validates_with TimeSlotValidator
 
@@ -88,7 +90,9 @@ class TimeSlot < ActiveRecord::Base
 
   private
 
-  include ApplicationHelper
+  class FuckingDoNotBreakMyTests
+    include ApplicationHelper
+  end
 
   def sec_hash_days(hash)
     day_hash = { "M" => :mon, "T" => :tue, "W" => :wed, "R" => :thu, "F" => :fri, "S" => :sat}
@@ -107,9 +111,11 @@ class TimeSlot < ActiveRecord::Base
   end
 
   def sec_hash_time(hash, pos, time)
-    hash[pos][:hour] = hour_murica(time)
-    hash[pos][:minute] = minute(time)
-    hash[pos][:period] = period_murica(time)
+    time_conv = FuckingDoNotBreakMyTests.new
+
+    hash[pos][:hour] = time_conv.hour_murica(time)
+    hash[pos][:minute] = time_conv.minute(time)
+    hash[pos][:period] = time_conv.period_murica(time)
 
     hash
   end
