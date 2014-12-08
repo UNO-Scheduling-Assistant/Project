@@ -1,0 +1,9 @@
+<% if @disabled[:room].eql?("false") %>
+$('#room').html('<%= escape_javascript(render partial: "sections/pieces/room/room_num", locals: {rooms: @new_sets[:rooms], room: @new_sets[:room], disabled: false}) %>');
+<% end %>
+
+<% if @disabled[:time].eql?("false") || !@disabled[:time] %>
+$('#end_hour').html('<%= escape_javascript(render partial: "sections/pieces/time/unit", locals: {unit_name: :end_hours, unit_set: @new_sets[:times][:end][:hours]}) %>');
+$('#end_minute').html('<%= escape_javascript(render partial: "sections/pieces/time/unit", locals: {unit_name: :end_minutes, unit_set: @new_sets[:times][:end][:minutes]}) %>');
+$('#end_period').html('<%= escape_javascript(render partial: "sections/pieces/time/unit", locals: {unit_name: :end_periods, unit_set: @new_sets[:times][:end][:period]}) %>');	
+<% end %>

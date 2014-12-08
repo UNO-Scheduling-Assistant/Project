@@ -11,6 +11,7 @@ class SectionsController < ApplicationController
 
     @disabled = {}
     @disabled[:room] = false
+    @disabled[:time] = false
   end
 
   def cross
@@ -39,9 +40,11 @@ class SectionsController < ApplicationController
     redirect_to courses_path
   end
 
-  def update_room_list
+  def update_list
     @new_sets = get_option_list(params)
-    @disabled = params[:disabled]
+    @disabled = {}
+    @disabled[:room] = params[:room_disabled]
+    @disabled[:time] = params[:time_disabled]
 
    # page["room"].replace_html partial: "pieces/room/room_num", locals: {rooms: @new_rooms}
   end

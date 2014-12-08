@@ -1,21 +1,66 @@
 <script>
-$(document).ready(function()
+
+function ajaxValue(roomdis, timedis, instdis)
 {
-  $('input:radio').click(function()
-  {
-    $.ajax(
+   $.ajax(
     {
-      url: "<%= update_room_list_sections_path %>",
+      url: "<%= update_list_sections_path %>",
       data: {
         desk: $("input:radio[name=desk]:checked").val(),
         chair: $("input:radio[name=chair]:checked").val(),
         board: $("input:radio[name=board]:checked").val(),
-        disabled: "<%= @disabled[:room] %>"
+        room_disabled: roomdis,
+        time_disabled: timedis,
+        instructor_disabled: instdis,
+        room: $("#room_num option:selected").val(),
+
+        mon: $('#mon').checked,
+        tue: $('#tue').checked,
+        wed: $('#wed').checked,
+        thu: $('#thu').checked,
+        fri: $('#fri').checked,
+        sat: $('#sat').checked,
+
+        stime_h: $('#start_hour option:selected').val(),
+        stime_m: $('#start_minute option:selected').val(),
+        stime_p: $('#start_period option:selected').val(),
+
+        etime_h: $('#end_hour option:selected').val(),
+        etime_m: $('#end_minute option:selected').val(),
+        etime_p: $('#end_period option:selected').val()
       },
       dataType: "script"
     });
+}
 
+$(document).ready(function()
+{
+  $('input:radio').click(function()
+  {
+    ajaxValue("<%= @disabled[:room] %>", true, true);
   });
+
+  $('#room_num option:selected').change(function()
+  {
+    ajaxValue(true, "<%= @disabled[:time] %>", true);
+  });
+
+  $('input:checkbox').click(function()
+  {
+    ajaxValue("<%= @disabled[:room] %>", true, true);
+   
+  });
+
+  $('#start-time div.type div select').change(function()
+  {
+    ajaxValue(true, "<%= @disabled[:time] %>", true);
+  });
+
+  $('#end-time div.type div select').change(function()
+  {
+    ajaxValue(true, "<%= @disabled[:time] %>", true);
+  });
+
 
 });
 </script>

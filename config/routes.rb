@@ -14,7 +14,7 @@ CourseSchedulingAssistant::Application.routes.draw do
     get 'cross', on: :member
     get 'add_instructor', on: :member
     get 'new/:course_id', to: 'sections#new', on: :collection, as: :new
-    get "update_room_list", on: :collection, as: :update_room_list
+    get "update_list", on: :collection, as: :update_list
   end
 
   # You can have the root of your site routed with "root"
