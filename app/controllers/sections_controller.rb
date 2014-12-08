@@ -46,9 +46,46 @@ class SectionsController < ApplicationController
   end
 
   def combine
+    @section = Section.find(params[:id])
+    @action = 'create'
+
+    @room_props = Room.all_room_props
+
+    @sets = get_option_list
+
+    @sets = get_section_data(@sets, @section)
+
+    @disabled = {}
+    @disabled[:room] = true
+    @disabled[:time] = true
+    @disabled[:instructor] = true
+    @disabled[:class_nbr] = false
+    @disabled[:course] = true
+    @disabled[:component] = true
+    @disabled[:session] = true
+    @disabled[:section] = false
   end
 
   def add_instructor
+    @section = Section.find(params[:id])
+    @action = 'create'
+
+    @room_props = Room.all_room_props
+
+    @sets = get_option_list
+
+    @sets = get_section_data(@sets, @section)
+
+    @disabled = {}
+    @disabled[:room] = true
+    @disabled[:time] = true
+    @disabled[:instructor] = false
+    @disabled[:class_nbr] = true
+    @disabled[:course] = true
+    @disabled[:component] = true
+    @disabled[:session] = true
+    @disabled[:section] = true
+    @disabled[:sec_descr] = true
   end
 
   def create
