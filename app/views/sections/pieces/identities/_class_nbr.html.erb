@@ -1,6 +1,6 @@
 <div class="block">
 	<div class="type">
-		<%= text_field_tag :class_nbr, default, placeholder: "Enter Number", disabled: @disabled[:class_nbr] %>
+		<%= text_field_tag :class_nbr, @sets[:class_nbr], placeholder: "Enter Number", disabled: @disabled[:class_nbr] %>
 	</div>
 	<div class="type">
 		<%= label_tag :class_nbr_lbl, "Class Number" %>

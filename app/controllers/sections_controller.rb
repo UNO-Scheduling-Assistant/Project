@@ -10,12 +10,18 @@ class SectionsController < ApplicationController
     @sets = get_option_list
     @sets[:course] = Course.find(params[:course_id]).to_arr_element
     @sets[:section] = nil
+    @sets[:session] = 1
+    @sets[:component] = "LEC"
+    @sets[:class_nbr] = nil
+
     @disabled = {}
     @disabled[:room] = false
     @disabled[:time] = false
     @disabled[:instructor] = false
     @disabled[:class_nbr] = false
     @disabled[:course] = true
+    @disabled[:component] = false
+    @disabled[:session] = false
   end
 
   def cross

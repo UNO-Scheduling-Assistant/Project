@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module RoomParams
   def self.create_params(params)
-    final_par = {building: "", room_num: "", room_capacity: "", desk_type: "", chair_type: "", board_type: ""}
+    final_par = {building: "", room_num: "", room_capacity: ""}
 
     params.each { |key, val| final_par[key] = val }
 
