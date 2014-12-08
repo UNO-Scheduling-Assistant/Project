@@ -75,7 +75,7 @@ module SectionsHelper
   def update_current_time_piece(piece, list)
     puts "piece: #{piece}"
     list.each do |item|
-      return item if piece.eql?(item[0])
+      return item if piece.eql?(item[1].to_s)
     end
 
     default_element
@@ -196,13 +196,20 @@ module SectionsHelper
   end
 
   def hour_qualified?(params, h)
+
+    # Start hour and current hour
+    sh = params[:stime_h]
+    ch = h
+
     return false if params[:etime_p].empty?
 
     # Start time is in the AM, and end time is in PM, all is allowed
     return true if !params[:stime_p].eql?(params[:etime_p])
 
     # Same hour
-    if h.to_i == params[:stime_h].to_i
+    ch = "0" if ch.to_i == 12
+    sh = "0" if sh.to_i == 12
+    if ch.to_i == sh.to_i
       # Cannot go beyond 55 minutes in 5 minute interval
       return false if params[:stime_m].to_i == 55
       return true
@@ -210,12 +217,25 @@ module SectionsHelper
 
     # We know that periods match at this point.
     # Disqualified if hour is less than start hour
-    return false if h.to_i < params[:stime_h].to_i && params[:stime_h].to_i != 12
+    return false if ch.to_i < sh.to_i
 
     true
   end
 
   def minute_qualified?(params, m)
+    return false if params[:etime_h].empty? || params[:etime_p].empty?
+
+    # Hour equal and period not equal
+    # Always true
+    return true if !params[:etime_p].eql?(params[:stime_p])
+
+    # We know period is equal
+    # If hour is equal, then all all minutes less than or equal
+    # to start minutes are bad
+    return false if params[:etime_h].eql?(params[:stime_h]) && m.to_i <= params[:stime_m].to_i
+
+    # Hour is not equal
+    # All else is true
     true
   end
 

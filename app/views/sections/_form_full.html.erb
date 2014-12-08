@@ -26,9 +26,9 @@ function ajaxValue(roomdis, timedis, instdis)
         stime_m: $('#start_minutes option:selected').val(),
         stime_p: $('#start_periods option:selected').val(),
 
-        etime_h: $('#end_hour option:selected').val(),
-        etime_m: $('#end_minute option:selected').val(),
-        etime_p: $('#end_period option:selected').val()
+        etime_h: $('#end_hours option:selected').val(),
+        etime_m: $('#end_minutes option:selected').val(),
+        etime_p: $('#end_periods option:selected').val()
       },
       dataType: "script"
     });
@@ -58,7 +58,12 @@ $(document).ready(function()
   });
 
   $('div#start-time div.type div select').change(function() { timeAjax(); });
-  $('#end-time div.type div').change(function() { timeAjax(); });
+  //$('#end-time div.type div').change(function() { timeAjax(); });
+
+  $('#end_period').change(function() { timeAjax(); });
+  $('#end_hour').change(function() { timeAjax(); });
+  $('#end_minute').change(function() { timeAjax(); });
+
 
 
 });

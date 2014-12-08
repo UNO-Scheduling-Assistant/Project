@@ -10,7 +10,7 @@
 	<tr>
 		<% [[:mon, "M"], [:tue, "T"], [:wed, "W"], [:thu, "R"], [:fri, "F"], [:sat, "S"]].each do |day| %>
 		<td>
-			<%= check_box_tag day[0], day[1] %>
+			<%= check_box_tag day[0], day[1], false, {disabled: disabled} %>
 		</td>
 		<% end %>
 	</tr>
