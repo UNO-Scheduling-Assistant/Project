@@ -1,0 +1,79 @@
+<script>
+
+function dayChecked(day)
+{
+  if (day.checked)
+  {
+    return day.val();
+  }
+  return null;
+}
+function ajaxValue(roomdis, timedis, instdis)
+{
+   $.ajax(
+    {
+      url: "<%= update_list_sections_path %>",
+      data: {
+        desk: $("input:radio[name=desk]:checked").val(),
+        chair: $("input:radio[name=chair]:checked").val(),
+        board: $("input:radio[name=board]:checked").val(),
+        room_disabled: roomdis,
+        time_disabled: timedis,
+        instructor_disabled: instdis,
+
+        room: $("#room_num option:selected").val(),
+        instructor: $("#instructor_list option:selected").val(),
+
+        mon: $('#mon:checked').val(),
+        tue: $('#tue:checked').val(),
+        wed: $('#wed:checked').val(),
+        thu: $('#thu:checked').val(),
+        fri: $('#fri:checked').val(),
+        sat: $('#sat:checked').val(),
+
+        stime_h: $('#start_hours option:selected').val(),
+        stime_m: $('#start_minutes option:selected').val(),
+        stime_p: $('#start_periods option:selected').val(),
+
+        etime_h: $('#end_hours option:selected').val(),
+        etime_m: $('#end_minutes option:selected').val(),
+        etime_p: $('#end_periods option:selected').val()
+      },
+      dataType: "script"
+    });
+}
+
+function timeAjax()
+{
+  ajaxValue("<%= @disabled[:room] %>", "<%= @disabled[:time] %>", "<%= @disabled[:instructor] %>");
+}
+
+$(document).ready(function()
+{
+  $('input:radio').click(function()
+  {
+    ajaxValue("<%= @disabled[:room] %>", true, true);
+  });
+
+  $('#room_num').change(function()
+  {
+    ajaxValue(true, false, true);
+  });
+
+  $('input:checkbox').click(function()
+  {
+    ajaxValue("<%= @disabled[:room] %>", true, "<%= @disabled[:instructor] %>");
+   
+  });
+
+  $('div#start-time div.type div select').change(function() { timeAjax(); });
+  //$('#end-time div.type div').change(function() { timeAjax(); });
+
+  $('#end_period').change(function() { timeAjax(); });
+  $('#end_hour').change(function() { timeAjax(); });
+  $('#end_minute').change(function() { timeAjax(); });
+
+
+
+});
+</script>

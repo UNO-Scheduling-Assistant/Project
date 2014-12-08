@@ -4,9 +4,11 @@ module SectionsHelper
     list = {}
     list[:rooms] = update_rooms(params) unless disabled(params, :room_disabled)
     list[:times] = update_times(params) unless disabled(params, :time_disabled)
+    list[:instructors] = update_instructors(params) unless disabled(params, :instructor_disabled)
 
     list[:room] = update_current_room(params, list) unless disabled(params, :room_disabled)
     list[:time] = update_current_time(params, list) unless disabled(params, :time_disabled)
+    list[:instructor] = update_current_instructor(params, list) unless disabled(params, :instructor_disabled)
 
     list
   end
@@ -14,7 +16,7 @@ module SectionsHelper
   def update_rooms(params=nil)
     rooms = Room.all
     room_list = []
-    room_list << ["None", nil]
+    room_list << default_element
     rooms.each { |r| room_list << r.to_arr_element if room_qualified?(r, params)}
 
     room_list
@@ -27,6 +29,15 @@ module SectionsHelper
     times[:end] = update_time(params, :end)
 
     times
+  end
+
+  def update_instructors(params=nil)
+    instructors = Instructor.all
+    instructor_list = [] << default_element
+
+    instructors.each { |i| instructor_list << i.to_arr_element if instructor_qualified?(i, params) }
+
+    instructor_list
   end
 
   private
@@ -53,6 +64,18 @@ module SectionsHelper
     end
 
     puts "Here"
+    default_element
+  end
+
+  def update_current_instructor(params, hash)
+    return default_element if params.nil?
+
+    inst_id = params[:instructor].to_i
+
+    return default_element if inst_id == 0
+
+    hash[:instructors].each { |set| return set if set[1] == inst_id }
+
     default_element
   end
 
@@ -131,6 +154,13 @@ module SectionsHelper
    # return false unless params[:board]
    # puts "Must be true"
     true && !time_conflicting
+  end
+
+  def instructor_qualified?(inst, params)
+
+    return true if params.nil?
+
+    return !time_taken?(Instructor, inst, params)
   end
 
   def radio_button_good?(param, checker)

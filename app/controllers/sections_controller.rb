@@ -12,6 +12,7 @@ class SectionsController < ApplicationController
     @disabled = {}
     @disabled[:room] = false
     @disabled[:time] = false
+    @disabled[:instructor] = false
   end
 
   def cross
@@ -45,6 +46,7 @@ class SectionsController < ApplicationController
     @disabled = {}
     @disabled[:room] = params[:room_disabled]
     @disabled[:time] = params[:time_disabled]
+    @disabled[:instructor] = params[:instructor_disabled]
 
    # page["room"].replace_html partial: "pieces/room/room_num", locals: {rooms: @new_rooms}
   end
