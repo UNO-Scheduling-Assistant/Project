@@ -1,5 +1,13 @@
 <script>
 
+function dayChecked(day)
+{
+  if (day.checked)
+  {
+    return day.val();
+  }
+  return null;
+}
 function ajaxValue(roomdis, timedis, instdis)
 {
    $.ajax(
@@ -15,12 +23,12 @@ function ajaxValue(roomdis, timedis, instdis)
 
         room: $("#room_num option:selected").val(),
 
-        mon: $('#mon').checked,
-        tue: $('#tue').checked,
-        wed: $('#wed').checked,
-        thu: $('#thu').checked,
-        fri: $('#fri').checked,
-        sat: $('#sat').checked,
+        mon: $('#mon:checked').val(),
+        tue: $('#tue:checked').val(),
+        wed: $('#wed:checked').val(),
+        thu: $('#thu:checked').val(),
+        fri: $('#fri:checked').val(),
+        sat: $('#sat:checked').val(),
 
         stime_h: $('#start_hours option:selected').val(),
         stime_m: $('#start_minutes option:selected').val(),

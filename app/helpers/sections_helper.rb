@@ -168,12 +168,33 @@ module SectionsHelper
     # Invalid time, do not care
     return false if stime.nil? || etime.nil?
 
+    time_wanted = {} 
+    time_wanted[:x] = timerange(stime)
+    time_wanted[:y] = timerange(etime)
+
+    days = checked_days(params)
+
+    ss_obj.section_settings.each { |s| return true if has_conflict?(s.time_slot)}
+  end
+
+  def timerange(time)
+    hour(time) * 60 + minute(time)
+  end
+
+  def checked_days(params)
+    checked = []
+    
+
   end
 
   def time_format(hour, minute, period)
     return nil if hour.empty? || minute.empty? || period.empty?
 
     "#{hour}:#{sprintf("%02d", minute)}:00 #{period}"
+  end
+
+  def has_conflict?(ts, days, time)
+
   end
 
   def default_element
