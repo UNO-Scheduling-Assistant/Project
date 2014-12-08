@@ -8,11 +8,14 @@ class SectionsController < ApplicationController
     @room_props = Room.all_room_props
 
     @sets = get_option_list
-
+    @sets[:course] = Course.find(params[:course_id]).to_arr_element
+    @sets[:section] = nil
     @disabled = {}
     @disabled[:room] = false
     @disabled[:time] = false
     @disabled[:instructor] = false
+    @disabled[:class_nbr] = false
+    @disabled[:course] = true
   end
 
   def cross

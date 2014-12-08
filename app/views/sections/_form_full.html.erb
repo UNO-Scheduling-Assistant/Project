@@ -3,17 +3,24 @@
 <%= form_for @section, url: {controller: 'sections', action: @action} do %>
 
 <div class= "sec-form">
-	<div class="block">
+  <div class="block">
     <div class="type">
-    <div class="clear">
-      <%= render 'sections/pieces/piece_instructor' %>
-    </div>
-    <div class="clear">
-      <%= render 'sections/pieces/piece_time', disabled: false %>
+     <div class="block">
+      <div class="type">
+        <div class="clear">
+          <%= render 'sections/pieces/piece_instructor' %>
+        </div>
+        <div class="clear">
+          <%= render 'sections/pieces/piece_time', disabled: false %>
+        </div>
+      </div>
+      <div class="type">
+        <%= render 'sections/pieces/piece_room', disabled: disable_room %>
+      </div>
     </div>
     </div>
     <div class="type">
-      <%= render 'sections/pieces/piece_room', disabled: disable_room %>
+        <%= render 'sections/pieces/piece_identities' %>
     </div>
   </div>
 </div>

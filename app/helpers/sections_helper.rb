@@ -10,6 +10,8 @@ module SectionsHelper
     list[:time] = update_current_time(params, list) unless disabled(params, :time_disabled)
     list[:instructor] = update_current_instructor(params, list) unless disabled(params, :instructor_disabled)
 
+    list[:courses] = get_course_list
+
     list
   end
 
@@ -51,6 +53,11 @@ module SectionsHelper
     days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
   end
 
+  def get_course_list
+    list = []
+    Course.all.each { |c| list << c.to_arr_element }
+    list
+  end
   def update_current_room(params, hash)
 
     return default_element if params.nil?

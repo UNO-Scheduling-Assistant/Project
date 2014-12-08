@@ -56,4 +56,8 @@ class Course < ActiveRecord::Base
   validates :course_id, numericality: { only_integer: true }
 
   validates_with CourseValidator
+
+  def to_arr_element
+    ["#{self.subject} #{self.course_id}", self.id]
+  end
 end
