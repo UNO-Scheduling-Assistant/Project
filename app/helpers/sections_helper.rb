@@ -130,7 +130,7 @@ module SectionsHelper
     #return false unless params[:board].nil? || params[:board].eql?("on") || room.board_type.eql?(params[:board])
    # return false unless params[:board]
    # puts "Must be true"
-    true
+    true && !time_conflicting
   end
 
   def radio_button_good?(param, checker)
@@ -168,13 +168,25 @@ module SectionsHelper
     # Invalid time, do not care
     return false if stime.nil? || etime.nil?
 
-    time_wanted = {} 
-    time_wanted[:x] = timerange(stime)
-    time_wanted[:y] = timerange(etime)
+    time_wanted = get_range_times(stime, etime)
 
+    # Get the days in an array.
+    # If nothing is checked, get the
+    # fuck out of here, man!  Evolution!
     days = checked_days(params)
+    return false if days.size == 0
 
-    ss_obj.section_settings.each { |s| return true if has_conflict?(s.time_slot)}
+    ss_obj.section_settings.each { |s| return true if has_conflict?(s.time_slot, days, time_wanted) }
+    
+    false
+  end
+
+  def get_range_times(stime, etime)
+    time = {}
+    time[:x] = timerange(stime)
+    time[:y] = timerange(etime)
+
+    time
   end
 
   def timerange(time)
@@ -183,8 +195,8 @@ module SectionsHelper
 
   def checked_days(params)
     checked = []
-    
-
+    [:mon, :tue, :wed, :thu, :fri, :sat].each { |v| checked << params[v] unless params[v].nil? }
+    checked
   end
 
   def time_format(hour, minute, period)
@@ -193,8 +205,45 @@ module SectionsHelper
     "#{hour}:#{sprintf("%02d", minute)}:00 #{period}"
   end
 
-  def has_conflict?(ts, days, time)
+  # We first check the days and see if we have any match.
+  # If not, return false.
+  #
+  # Then we make another range of times for our obj time
+  #
+  def has_conflict?(ts, days, t_range)
+    slot_days = ts.days
+    return false if no_matching_days?(slot_days, days)
 
+    # We have matching days, so continue on.
+    slot_range = get_range_times(ts.start_time, ts.end_time)
+
+    collided?(t_range, slot_range)
+  end
+
+  def no_matching_days?(day_str, day_arr)
+    day_arr.each { |day| return false if day_str =~ /.*#{day}.*/ }
+
+    true
+  end
+
+  def collided?(r, s)
+    any_ledge_collision?(r, s) || any_redge_collision?(r, s)
+  end
+
+  def any_ledge_collision?(r, s)
+    ledge_in_range?(r, s) || ledge_in_range?(s, r)
+  end
+
+  def any_redge_collision?(r, s)
+    redge_in_range?(r, s) || redge_in_range?(s, r)
+  end
+
+  def ledge_in_range?(r, s)
+    (r[:x] >= s[:x] && r[:x] <= s[:y])
+  end
+
+  def redge_in_range?(r, s)
+    r[:y] >= s[:x] && r[:y] <= s[:y]
   end
 
   def default_element

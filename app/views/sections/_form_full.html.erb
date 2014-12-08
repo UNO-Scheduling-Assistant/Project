@@ -44,7 +44,7 @@ function ajaxValue(roomdis, timedis, instdis)
 
 function timeAjax()
 {
-  ajaxValue(true, "<%= @disabled[:time] %>", true);
+  ajaxValue("<%= @disabled[:room] %>", "<%= @disabled[:time] %>", true);
 }
 
 $(document).ready(function()
