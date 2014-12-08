@@ -1,16 +1,16 @@
 <div class="type">
 	<div id=<%= "#{time.to_s}_hour" %>>
-		<%= render 'sections/pieces/time/unit', unit_name: :start_hours, unit_set: @sets[:times][time][:hours] %>
+		<%= render 'sections/pieces/time/unit', unit_name: "#{time.to_s}_hours", unit_set: @sets[:times][time][:hours], default: ["None", nil] %>
 	</div>
 </div>
 <div class="type">
 	<div id=<%= "#{time.to_s}_minute" %>>
-		<%= render 'sections/pieces/time/unit', unit_name: :start_minutes, unit_set: @sets[:times][time][:minutes] %>
+		<%= render 'sections/pieces/time/unit', unit_name: "#{time.to_s}_minutes", unit_set: @sets[:times][time][:minutes], default: ["None", nil] %>
 	</div>
 </div>
 <div class="type">
 	<div id=<%= "#{time.to_s}_period" %>>
-		<%= render 'sections/pieces/time/unit', unit_name: :start_periods, unit_set: @sets[:times][time][:period] %>
+		<%= render 'sections/pieces/time/unit', unit_name: "#{time.to_s}_periods", unit_set: @sets[:times][time][:period], default: ["None", nil] %>
 	</div>
 </div>
 <div class="type">

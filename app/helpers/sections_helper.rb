@@ -45,11 +45,7 @@ module SectionsHelper
 
     room_id = params[:room].to_i
 
-    puts room_id
-
     return default_element if room_id == 0
-
-    puts room_id
 
     hash[:rooms].each do |room_set|
       return room_set if room_set[1] == room_id
@@ -60,7 +56,29 @@ module SectionsHelper
   end
 
   def update_current_time(params, hash)
-    
+    time = {}
+    print params
+    puts ""
+    print hash
+    puts ""
+    return {period: default_element, hour: default_element, minute: default_element} if params.nil?
+
+    time[:period] = update_current_time_piece(params[:etime_p], hash[:times][:end][:period])
+    time[:hour] = update_current_time_piece(params[:etime_h], hash[:times][:end][:hours])
+    time[:minute] = update_current_time_piece(params[:etime_m], hash[:times][:end][:minutes])
+
+    print time
+    puts ""
+    time
+  end
+
+  def update_current_time_piece(piece, list)
+    puts "piece: #{piece}"
+    list.each do |item|
+      return item if piece.eql?(item[0])
+    end
+
+    default_element
   end
 
   def update_time(params, what)
@@ -95,7 +113,7 @@ module SectionsHelper
   def update_minutes(params)
     minutes = []
     minutes << default_element
-    (0..11).each { |n| minutes << [sprintf("%02d", n * 5), sprintf("%02d", n * 5)] }
+    (0..11).each { |n| minutes << [sprintf("%02d", n * 5), n * 5] }
     minutes
   end
 
@@ -148,7 +166,7 @@ module SectionsHelper
   end
 
   def add_end_hours(params, hours)
-    (1..12).each { |h| hours << [h, h.to_s] if hour_qualified?(params, h) }
+    (1..12).each { |h| hours << [h.to_s, h] if hour_qualified?(params, h) }
     hours
   end
 
@@ -192,7 +210,7 @@ module SectionsHelper
 
     # We know that periods match at this point.
     # Disqualified if hour is less than start hour
-    return false if h.to_i < params[:stime_h]
+    return false if h.to_i < params[:stime_h].to_i && params[:stime_h].to_i != 12
 
     true
   end

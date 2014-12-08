@@ -12,6 +12,7 @@ function ajaxValue(roomdis, timedis, instdis)
         room_disabled: roomdis,
         time_disabled: timedis,
         instructor_disabled: instdis,
+
         room: $("#room_num option:selected").val(),
 
         mon: $('#mon').checked,
@@ -21,9 +22,9 @@ function ajaxValue(roomdis, timedis, instdis)
         fri: $('#fri').checked,
         sat: $('#sat').checked,
 
-        stime_h: $('#start_hour option:selected').val(),
-        stime_m: $('#start_minute option:selected').val(),
-        stime_p: $('#start_period option:selected').val(),
+        stime_h: $('#start_hours option:selected').val(),
+        stime_m: $('#start_minutes option:selected').val(),
+        stime_p: $('#start_periods option:selected').val(),
 
         etime_h: $('#end_hour option:selected').val(),
         etime_m: $('#end_minute option:selected').val(),
@@ -33,6 +34,11 @@ function ajaxValue(roomdis, timedis, instdis)
     });
 }
 
+function timeAjax()
+{
+  ajaxValue(true, "<%= @disabled[:time] %>", true);
+}
+
 $(document).ready(function()
 {
   $('input:radio').click(function()
@@ -40,9 +46,9 @@ $(document).ready(function()
     ajaxValue("<%= @disabled[:room] %>", true, true);
   });
 
-  $('#room_num option:selected').change(function()
+  $('#room_num').change(function()
   {
-    ajaxValue(true, "<%= @disabled[:time] %>", true);
+    ajaxValue(true, false, true);
   });
 
   $('input:checkbox').click(function()
@@ -51,15 +57,8 @@ $(document).ready(function()
    
   });
 
-  $('#start-time div.type div select').change(function()
-  {
-    ajaxValue(true, "<%= @disabled[:time] %>", true);
-  });
-
-  $('#end-time div.type div select').change(function()
-  {
-    ajaxValue(true, "<%= @disabled[:time] %>", true);
-  });
+  $('div#start-time div.type div select').change(function() { timeAjax(); });
+  $('#end-time div.type div').change(function() { timeAjax(); });
 
 
 });
