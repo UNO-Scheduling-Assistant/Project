@@ -12,6 +12,16 @@ module HomeHelper
     csv.each { |row| put_row_into_database(row) }
   end
 
+  def write_csv
+    csv_file = "Class Nbr,Subject,Catalog,Section,Comb Sect,CDescr,SDescr,Acad Group,Cap Enrl,Tot Enrl,Pat,Mtg Start,Mtg End,Facil ID,Capacity,Last,First Name,Role,Start Date,End Date,Session,Location,Mode,CrsAtr Val,Component\n"
+
+    sections = Section.report_table_array
+
+    sections.each { |sec| csv_file << write_csv_line(sec) << "\n" }
+
+    send_data csv_file, filename: "PKI Rooms.csv"
+  end
+
   private
 
   def put_row_into_database(row)
