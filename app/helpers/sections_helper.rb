@@ -25,9 +25,28 @@ module SectionsHelper
     sets[:instructor] = sec.section_setting.instructor.to_arr_element
     sets[:time] = sec.section_setting.time_slot.to_sec_hash
     sets[:sec_descr] = sec.sec_description
+    sets[:crs_atr] = sec.crsatr_val
+    sets[:role] = sec.role
+    sets[:acad_group] = sec.acad_group
 
     sets[:times][:end] = update_time(nil, :start)
     sets
+  end
+
+  def get_tb_attributes
+    tb = {}
+    tb[:placeholder] = get_placeholders
+    tb[:label] = get_labels
+
+    tb
+  end
+
+  def generate_disable_hash(action)
+    return generate_newdit_disable_hash if action == :new || action == :edit 
+    return generate_inst_disable_hash if action == :instructor
+    return generate_cross_disable_hash if action == :cross
+    return generate_comb_disable_hash if action == :combine
+
   end
 
   def update_rooms(params=nil)
@@ -58,6 +77,81 @@ module SectionsHelper
   end
 
   private
+
+  def get_placeholders
+    placeholders = {}
+    placeholders[:descr] = "Describe, if necessary"
+    placeholders[:number] = "Enter Number"
+    placeholders[:data] = "Enter Data"
+
+    placeholders
+  end
+
+  def get_labels
+    labels = {}
+
+    labels[:acad_group] = "Academic Group"
+    labels[:role] = "Instructor Role"
+    labels[:component] = "Component (LAB, LEC, IND, SEM, FLD)"
+    labels[:session] = "Session Number"
+    labels[:crs_atr] = "Cross Attribute"
+    labels[:section] = "Section Number"
+    labels[:sec_descr] = "Description"
+    labels[:class_nbr] = "Class Number"
+
+    labels
+  end
+
+  def generate_newdit_disable_hash
+    exceptions = [:course]
+    list = enable_all(exceptions)
+
+    disable_hash(list)
+  end
+
+  def generate_inst_disable_hash
+    exceptions = [:instructor]
+    list = disable_all(exceptions)
+
+    disable_hash(list)
+  end
+
+  def generate_cross_disable_hash
+    exceptions = [:course, :class_nbr, :sec_descr, :location]
+    list = disable_all(exceptions)
+
+    disable_hash(list)
+  end
+
+  def generate_comb_disable_hash
+    exceptions = [:section, :class_nbr, :sec_descr, :location, :seats]
+    list = disable_all(exceptions)
+
+    disable_hash(list)
+  end
+
+  def disable_hash(list)
+    hash = {}
+
+    generate_attributes.each do |ga|
+      disable = list.any? { |l| l == ga }
+      hash[ga] = disable
+    end
+
+    hash
+  end
+
+  def generate_attributes
+    [:room, :time, :instructor, :class_nbr, :course, :component, :session, :sec_descr, :section, :location, :seats]
+  end
+
+  def enable_all(exceptions)
+    exceptions
+  end
+
+  def disable_all(exceptions)
+    generate_attributes.reject { |el| exceptions.any? { |ex| el == ex } }
+  end
 
   def disabled(params, tag)
     return false if params.nil? || params[tag].nil?

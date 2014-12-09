@@ -43,8 +43,6 @@ module ApplicationHelper
     time_conv(time).strftime("%p")
   end
 
-  
-
   def cu_flash(params)
     "#{params[:model]} " << (params[:val] ?  cu_success(params) : cu_fail(params))
   end

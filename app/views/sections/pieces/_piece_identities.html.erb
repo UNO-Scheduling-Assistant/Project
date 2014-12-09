@@ -1,25 +1,13 @@
 <%= field_set_tag "Identification" do %>
-<div class="clear">
-	<%= render 'sections/pieces/identities/class_nbr', default: nil %>
-</div>
-<div class="clear">
-	<%= render 'sections/pieces/identities/course' %>
-</div>
 
-<div class="clear">
-	<%= render 'sections/pieces/identities/section' %>
-</div>
 
-<div class="clear">
-	<%= render 'sections/pieces/identities/description' %>
-</div>
-
-<div class="clear">
-	<%= render 'sections/pieces/identities/session' %>
-</div>
-
-<div class="clear">
-	<%= render 'sections/pieces/identities/component' %>
-</div>
-
+<div class="clear"> <%= render 'sections/pieces/identities/text_box', elkey: :class_nbr, phkey: :number %> </div>
+<div class="clear"> <%= render 'sections/pieces/identities/course' %> </div>
+<div class="clear"> <%= render 'sections/pieces/identities/text_box', elkey: :section, phkey: :number %> </div>
+<div class="clear"> <%= render 'sections/pieces/identities/text_box', elkey: :sec_descr, phkey: :descr %> </div>
+<div class="clear"> <%= render 'sections/pieces/identities/text_box', elkey: :session, phkey: :number %> </div>
+<div class="clear"> <%= render 'sections/pieces/identities/text_box', elkey: :component, phkey: :data %> </div>
+<div class="clear"> <%= render 'sections/pieces/identities/text_box', elkey: :acad_group, phkey: :data %> </div>
+<div class="clear"> <%= render 'sections/pieces/identities/text_box', elkey: :role, phkey: :data %> </div>
+<div class="clear"> <%= render 'sections/pieces/identities/text_box', elkey: :crs_atr, phkey: :data %> </div>
 <% end %>

@@ -14,6 +14,8 @@ class SectionsController < ApplicationController
     @sets[:component] = "LEC"
     @sets[:class_nbr] = nil
 
+    @disabled = generate_disable_hash(:new)
+=begin
     @disabled = {}
     @disabled[:room] = false
     @disabled[:time] = false
@@ -22,6 +24,8 @@ class SectionsController < ApplicationController
     @disabled[:course] = true
     @disabled[:component] = false
     @disabled[:session] = false
+=end
+    @textbox_vals = get_tb_attributes
   end
 
   def cross
@@ -33,7 +37,7 @@ class SectionsController < ApplicationController
     @sets = get_option_list
 
     @sets = get_section_data(@sets, @section)
-
+=begin
     @disabled = {}
     @disabled[:room] = true
     @disabled[:time] = true
@@ -43,6 +47,10 @@ class SectionsController < ApplicationController
     @disabled[:component] = true
     @disabled[:session] = true
     @disabled[:section] = true
+=end
+    @disabled = generate_disable_hash(:cross)
+
+    @textbox_vals = get_tb_attributes
   end
 
   def combine
@@ -54,7 +62,7 @@ class SectionsController < ApplicationController
     @sets = get_option_list
 
     @sets = get_section_data(@sets, @section)
-
+=begin
     @disabled = {}
     @disabled[:room] = true
     @disabled[:time] = true
@@ -64,6 +72,9 @@ class SectionsController < ApplicationController
     @disabled[:component] = true
     @disabled[:session] = true
     @disabled[:section] = false
+=end
+    @disabled = generate_disable_hash(:combine)
+    @textbox_vals = get_tb_attributes
   end
 
   def add_instructor
@@ -76,6 +87,8 @@ class SectionsController < ApplicationController
 
     @sets = get_section_data(@sets, @section)
 
+    @disabled = generate_disable_hash(:instructor)
+=begin
     @disabled = {}
     @disabled[:room] = true
     @disabled[:time] = true
@@ -86,6 +99,8 @@ class SectionsController < ApplicationController
     @disabled[:session] = true
     @disabled[:section] = true
     @disabled[:sec_descr] = true
+=end
+    @textbox_vals = get_tb_attributes
   end
 
   def create
@@ -104,6 +119,8 @@ class SectionsController < ApplicationController
 
     @sets = get_section_data(@sets, @section)
 
+    @disabled = generate_disable_hash(:edit)
+=begin
     @disabled = {}
     @disabled[:room] = false
     @disabled[:time] = false
@@ -112,6 +129,8 @@ class SectionsController < ApplicationController
     @disabled[:course] = true
     @disabled[:component] = false
     @disabled[:session] = false
+=end
+    @textbox_vals = get_tb_attributes
   end
 
   def update
