@@ -46,11 +46,11 @@ class SectionSetting < ActiveRecord::Base
 	before_destroy { destruct }
 
 	def destruct
-		if time_slot.section_settings.count == 1
+		if  time_slot && time_slot.section_settings.count == 1
 			time_slot.destroy
 		end
 
-		if course_date.section_settings.count == 1
+		if course_date && course_date.section_settings.count == 1
 			course_date.destroy
 		end
 	end

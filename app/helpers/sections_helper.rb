@@ -18,15 +18,15 @@ module SectionsHelper
   end
 
   def get_section_data(sets, sec)
-    sets[:course] = sec.course.to_arr_element
+    sets[:course] = sec.course.to_arr_element unless sec.course.nil?
     sets[:session] = sec.session
     sets[:component] = sec.component
     sets[:section] = sec.sec_id
     sets[:class_nbr] = sec.class_num
-    sets[:date] = sec.section_setting.course_date.to_arr_element
-    sets[:room] = sec.section_setting.room.to_arr_element
-    sets[:instructor] = sec.section_setting.instructor.to_arr_element
-    sets[:time] = sec.section_setting.time_slot.to_sec_hash
+    sets[:date] = sec.section_setting.course_date.to_arr_element unless sec.section_setting.nil? || sec.section_setting.course_date.nil?
+    sets[:room] = sec.section_setting.room.to_arr_element unless sec.section_setting.nil? || sec.section_setting.room.nil?
+    sets[:instructor] = sec.section_setting.instructor.to_arr_element unless sec.section_setting.nil? || sec.section_setting.instructor.nil?
+    sets[:time] = sec.section_setting.time_slot.to_sec_hash unless sec.section_setting.nil? || sec.section_setting.time_slot.nil?
     sets[:sec_descr] = sec.sec_description
     sets[:crs_atr] = sec.crsatr_val
     sets[:role] = sec.role
@@ -47,13 +47,44 @@ module SectionsHelper
     tb
   end
 
+  def sec_params(params, ss)
+    {course_id: params[:course_list].to_i, 
+     section_setting_id: ss, 
+     mode: params[:mode], 
+     location: params[:location], 
+     crsatr_val: params[:crs_atr], 
+     sec_capacity: params[:seats], 
+     class_num: params[:class_nbr].to_i, 
+     role: params[:role], 
+     acad_group: params[:acad_group], 
+     component: params[:component],
+     session: params[:session].to_i,
+     sec_id: params[:section].to_i}
+  end
+
   def generate_disable_hash(action)
     return generate_newdit_disable_hash if action == :new || action == :edit 
     return generate_inst_disable_hash if action == :instructor
     return generate_cross_disable_hash if action == :cross
     return generate_comb_disable_hash if action == :combine
-
   end
+
+  def get_time(params)
+    days = get_days(params)
+    startt = get_start_time(params)
+    endt = get_end_time(params)
+
+    return nil if days.nil? || startt.nil? || endt.nil?
+
+    time = {}
+    time[:days] = days
+    time[:start] = startt
+    time[:end] = endt
+
+    time
+  end
+
+
 
   def update_rooms(params=nil)
     rooms = Room.all
@@ -126,14 +157,14 @@ module SectionsHelper
   end
 
   def generate_cross_disable_hash
-    exceptions = [:course, :class_nbr, :sec_descr, :location]
+    exceptions = [:course, :class_nbr, :sec_descr, :location, :mode, :acad_group, :component]
     list = disable_all(exceptions)
 
     disable_hash(list)
   end
 
   def generate_comb_disable_hash
-    exceptions = [:section, :class_nbr, :sec_descr, :location, :seats]
+    exceptions = [:section, :class_nbr, :sec_descr, :location, :seats, :mode, :acad_group, :component]
     list = disable_all(exceptions)
 
     disable_hash(list)
@@ -151,7 +182,7 @@ module SectionsHelper
   end
 
   def generate_attributes
-    [:room, :time, :instructor, :class_nbr, :course, :component, :session, :sec_descr, :section, :location, :seats]
+    [:room, :time, :instructor, :class_nbr, :course, :component, :session, :sec_descr, :section, :location, :seats, :mode, :role, :date, :acad_group]
   end
 
   def enable_all(exceptions)
@@ -522,6 +553,33 @@ module SectionsHelper
     # Hour is not equal
     # All else is true
     true
+  end
+
+  def get_days(params)
+    options = {mon: "M", tue: "T", wed: "W", thu: "R", fri: "F", sat: "S"}
+
+    day_str = ""
+    options.each { |key, val| day_str += (params[key].nil? ? "" : val) }
+    day_str.empty? ? nil : day_str
+  end
+
+  def get_start_time(params)
+    get_setime(params, {hr: :start_hours, min: :start_minutes, per: :start_periods})
+  end
+
+  def get_end_time(params)
+    get_setime(params, {hr: :end_hours, min: :end_minutes, per: :end_periods})
+  end
+
+  def get_setime(params, using)
+    hour = params[using[:hr]]
+    min = sprintf("%02d", params[using[:min]])
+    per = params[using[:per]]
+
+    return nil if hour.empty? || min.empty? || per.empty?
+
+    #time = "#{params[using[:hr]]}:#{params[using[:min]]}:00 #{params[using[:per]]}"
+    "#{hour}:#{min}:00 #{per}"
   end
 
 end

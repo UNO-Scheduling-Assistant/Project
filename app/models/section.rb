@@ -76,7 +76,7 @@ class Section < ActiveRecord::Base
   # If it has only one, delete the section setting.  
   # Then delete the section.
   def destruct
-    if section_setting.sections.count == 1
+    if self.section_setting.sections.count == 1
       section_setting.destroy
     end
   end

@@ -1,9 +1,13 @@
 class SectionsController < ApplicationController
   include SectionsHelper
 
+  class Homie
+    include ApplicationHelper
+  end
+
 	def new
     @section = Section.new
-    @action = 'create'
+    @action = :create
 
     @room_props = Room.all_room_props
 
@@ -22,7 +26,7 @@ class SectionsController < ApplicationController
 
   def cross
     @section = Section.find(params[:id])
-    @action = 'create'
+    @action = :create
 
     @room_props = Room.all_room_props
 
@@ -37,7 +41,7 @@ class SectionsController < ApplicationController
 
   def combine
     @section = Section.find(params[:id])
-    @action = 'create'
+    @action = :create
 
     @room_props = Room.all_room_props
 
@@ -51,7 +55,7 @@ class SectionsController < ApplicationController
 
   def add_instructor
     @section = Section.find(params[:id])
-    @action = 'create'
+    @action = :create
 
     @room_props = Room.all_room_props
 
@@ -65,15 +69,41 @@ class SectionsController < ApplicationController
   end
 
   def create
-    time_id
-    valid = Section.create(section_params).valid?
-    flash.notice = (valid ? "Section created successfuly" : "Section not created: Invalid")
-    redirect_to (valid ? courses_path : new_section_path)
+    print params
+    puts "\n\n"
+    
+    valid = true
+    time = nil
+    time_id = nil
+
+    # Get time
+    time_valid = !(time = get_time(params)).nil?
+    time_id = Homie.new.insert_into(TimeSlot, days: time[:days], start_time: time[:start], end_time: time[:end]) if time_valid
+
+    room_id = params[:room_num].to_i
+    room_id = nil if room_id == 0
+
+    inst_id = params[:instructor_list].to_i
+    inst_id = nil if inst_id == 0
+
+    date_id = params[:date_list].to_i
+    date_id = nil if date_id == 0
+
+    # Now get section setting
+    ss_id = Homie.new.insert_into(SectionSetting, time_slot_id: time_id, room_id: room_id, instructor_id: inst_id, course_date_id: date_id)
+
+
+    @section = Section.new(sec_params(params, ss_id))
+    valid = @section.save
+
+    flash.notice = cu_flash(val: valid, action: 'created', model: "Date", record: @date)
+
+    redirect_to (valid ? course_path(params[:course_list].to_i) : :back)
   end
 
   def edit
     @section = Section.find(params[:id])
-    @action = 'update'
+    @action = :update
 
     @room_props = Room.all_room_props
 
@@ -87,6 +117,36 @@ class SectionsController < ApplicationController
   end
 
   def update
+    print params
+    puts "\n\n"
+    
+    valid = true
+    time = nil
+    time_id = nil
+
+    # Get time
+    time_valid = !(time = get_time(params)).nil?
+    time_id = Homie.new.insert_into(TimeSlot, days: time[:days], start_time: time[:start], end_time: time[:end]) if time_valid
+
+    room_id = params[:room_num].to_i
+    room_id = nil if room_id == 0
+
+    inst_id = params[:instructor_list].to_i
+    inst_id = nil if inst_id == 0
+
+    date_id = params[:date_list].to_i
+    date_id = nil if date_id == 0
+
+    # Now get section setting
+    ss_id = Homie.new.insert_into(SectionSetting, time_slot_id: time_id, room_id: room_id, instructor_id: inst_id, course_date_id: date_id)
+
+
+    @section = Section.find(params[:id])
+    valid = @section.update(sec_params(params, ss_id))
+
+    flash.notice = cu_flash(val: valid, action: 'updated', model: "Date", record: @date)
+
+    redirect_to (valid ? course_path(params[:course_list].to_i) : :back)
   end
 
   def destroy

@@ -14,6 +14,10 @@ CourseSchedulingAssistant::Application.routes.draw do
     get 'cross', on: :member
     get 'add_instructor', on: :member
     get 'new/:course_id', to: 'sections#new', on: :collection, as: :new
+    patch 'add_instructor', to: 'sections#create', on: :member
+    patch 'cross', to: 'sections#create', on: :member
+    patch 'combine', to: 'sections#create', on: :member
+    get 'edit', to: 'sections#edit', on: :member, as: :edit
     get "update_list", on: :collection, as: :update_list
   end
 

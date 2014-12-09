@@ -1,6 +1,6 @@
 <%= render 'sections/form_script' %>
 
-<%= form_for @section, url: {controller: 'sections', action: @action} do %>
+<%= form_for @section, url: {controller: 'sections', action: @action, method: :post} do |f| %>
 
 <div class= "sec-form">
   <div class="block">

@@ -8,6 +8,13 @@ function dayChecked(day)
   }
   return null;
 }
+
+function enableAll()
+{
+  $('form').find(':input').removeAttr('disabled');
+  $('form').find('select').removeAttr('disabled');
+}
+
 function ajaxValue(roomdis, timedis, instdis, seatdis)
 {
    $.ajax(
@@ -83,5 +90,6 @@ $(document).ready(function()
 
   $('#seats').change(function() { ajaxValue(true, true, true, false)});
 
+  $('form').submit(function() { enableAll(); });
 });
 </script>
