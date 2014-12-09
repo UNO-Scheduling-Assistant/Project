@@ -13,6 +13,7 @@ class SectionsController < ApplicationController
     @sets[:session] = 1
     @sets[:component] = "LEC"
     @sets[:class_nbr] = nil
+    @sets[:seats] = 1
 
     @disabled = generate_disable_hash(:new)
 
@@ -99,6 +100,7 @@ class SectionsController < ApplicationController
     @disabled[:room] = params[:room_disabled]
     @disabled[:time] = params[:time_disabled]
     @disabled[:instructor] = params[:instructor_disabled]
+    @disabled[:seats] = params[:seat_disabled]
 
    # page["room"].replace_html partial: "pieces/room/room_num", locals: {rooms: @new_rooms}
   end

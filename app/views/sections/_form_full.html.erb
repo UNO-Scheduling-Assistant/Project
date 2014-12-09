@@ -15,7 +15,17 @@
         </div>
       </div>
       <div class="type">
-        <%= render 'sections/pieces/piece_room', disabled: disable_room %>
+        <div class="clear">
+          <%= render 'sections/pieces/piece_room', disabled: disable_room %>
+        </div>
+        <div class="clear">
+          <%= render 'sections/pieces/piece_seats' %>
+        </div>
+        <div class="clear">
+          <%= field_set_tag "Submission" do %>
+          <%= submit_tag "Submit" %>
+          <% end %>
+        </div>
       </div>
     </div>
     </div>

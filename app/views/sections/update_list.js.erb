@@ -13,3 +13,8 @@ console.log("eher");
 <% if @disabled[:instructor].eql?("false") || !@disabled[:instructor] %>
 	$('#instructor-container').html('<%= escape_javascript(render partial: "sections/pieces/instructor/name", locals: {set: @new_sets[:instructors], default: @new_sets[:instructor], disabled: false, default: @new_sets[:instructor]}) %>');
 <% end %>
+
+<% if @disabled[:seats].eql?("false") || !@disabled[:seats] %>
+	console.log("Seats");
+	$('#seat-label').html('<%= escape_javascript(render partial: "sections/pieces/seats/label", locals: {value: @new_sets[:seat_lbl]}) %>');
+<% end %>

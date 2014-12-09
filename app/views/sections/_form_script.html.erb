@@ -8,7 +8,7 @@ function dayChecked(day)
   }
   return null;
 }
-function ajaxValue(roomdis, timedis, instdis)
+function ajaxValue(roomdis, timedis, instdis, seatdis)
 {
    $.ajax(
     {
@@ -20,6 +20,7 @@ function ajaxValue(roomdis, timedis, instdis)
         room_disabled: roomdis,
         time_disabled: timedis,
         instructor_disabled: instdis,
+        seat_disabled: seatdis,
 
         room: $("#room_num option:selected").val(),
         instructor: $("#instructor_list option:selected").val(),
@@ -30,6 +31,8 @@ function ajaxValue(roomdis, timedis, instdis)
         thu: $('#thu:checked').val(),
         fri: $('#fri:checked').val(),
         sat: $('#sat:checked').val(),
+
+        seats: $('#seats').val(),
 
         stime_h: $('#start_hours option:selected').val(),
         stime_m: $('#start_minutes option:selected').val(),
@@ -46,24 +49,24 @@ function ajaxValue(roomdis, timedis, instdis)
 function timeAjax()
 {
   console.log("TypeAJAX");
-  ajaxValue("<%= @disabled[:room] %>", false, "<%= @disabled[:instructor] %>");
+  ajaxValue("<%= @disabled[:room] %>", false, "<%= @disabled[:instructor] %>", true);
 }
 
 $(document).ready(function()
 {
   $('input:radio').click(function()
   {
-    ajaxValue("<%= @disabled[:room] %>", true, true);
+    ajaxValue("<%= @disabled[:room] %>", true, true, true);
   });
 
   $('#room_num').change(function()
   {
-    ajaxValue(true, false, true);
+    ajaxValue(true, false, true, false);
   });
 
   $('input:checkbox').click(function()
   {
-    ajaxValue("<%= @disabled[:room] %>", true, "<%= @disabled[:instructor] %>");
+    ajaxValue("<%= @disabled[:room] %>", true, "<%= @disabled[:instructor] %>", true);
    
   });
 
@@ -78,7 +81,7 @@ $(document).ready(function()
   $('#end_hour').change(function() { timeAjax(); });
   $('#end_minute').change(function() { timeAjax(); });
 
-
+  $('#seats').change(function() { ajaxValue(true, true, true, false)});
 
 });
 </script>

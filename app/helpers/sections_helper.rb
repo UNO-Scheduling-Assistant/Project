@@ -5,7 +5,7 @@ module SectionsHelper
     list[:rooms] = update_rooms(params) unless disabled(params, :room_disabled)
     list[:times] = update_times(params) unless disabled(params, :time_disabled)
     list[:instructors] = update_instructors(params) unless disabled(params, :instructor_disabled)
-
+    list[:seat_lbl] = update_seats(params) unless disabled(params, :seat_disabled)
     list[:dates] = update_dates
 
     list[:room] = update_current_room(params, list) unless disabled(params, :room_disabled)
@@ -32,6 +32,8 @@ module SectionsHelper
     sets[:role] = sec.role
     sets[:acad_group] = sec.acad_group
     sets[:location] = sec.location
+    sets[:mode] = sec.mode
+    sets[:seats] = sec.sec_capacity
 
     sets[:times][:end] = update_time(nil, :start)
     sets
@@ -104,6 +106,7 @@ module SectionsHelper
     labels[:sec_descr] = "Description"
     labels[:class_nbr] = "Class Number"
     labels[:location] = "Location"
+    labels[:mode] = "Mode"
 
     labels
   end
@@ -173,6 +176,7 @@ module SectionsHelper
     Course.all.each { |c| list << c.to_arr_element }
     list
   end
+
   def update_current_room(params, hash)
 
     return default_element if params.nil?
@@ -220,6 +224,20 @@ module SectionsHelper
     print time
     puts ""
     time
+  end
+
+  def update_seats(params)
+    return "" if params.nil?
+
+    capacity = Room.find(params[:room].to_i).room_capacity
+
+    capacity = capacity - params[:seats].to_i
+
+    if capacity <= 0
+      return "OUT OF ROOM"
+    else
+      return "#{capacity} seats left in room"
+    end
   end
 
   def update_current_time_piece(piece, list)
