@@ -42,7 +42,7 @@ module HomeHelper
     when :room
       building_room(sec)
     else
-      "#{sec[item]}"
+      "\"#{sec[item]}\""
     end
   end
   
