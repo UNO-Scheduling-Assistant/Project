@@ -42,7 +42,15 @@ module HomeHelper
     when :room
       building_room(sec)
     else
-      "\"#{sec[item]}\""
+      enter_csv_item(sec, item)
+    end
+  end
+
+  def enter_csv_item(sec, item)
+    if sec[item] =~ /.*\,.*/
+      return "\"#{sec[item]}\""
+    else
+      return "#{sec[item]}"
     end
   end
   
