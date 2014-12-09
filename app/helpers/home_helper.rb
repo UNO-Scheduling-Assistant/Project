@@ -24,6 +24,16 @@ module HomeHelper
 
   private
 
+  def generate_csv_line_order
+    [:class_num, :subject, :course_id, :sec_id, :comb, :course_name, :section_description, :acad_group, :enroll_cap, :tot_enr, :days, :start_time, :end_time, :room, :room_cap, :last_name, :first_name, :role, :start_date, :end_date, :session, :location, :mode, :crsatr_val, :component]
+  end
+
+  def write_csv_line(section)
+    line = ""
+    generate_csv_line_order.each_with_index { |item, i| line << (i > 0 ? "," : "") << handle_csv_item(item) }
+    line
+  end
+  
   def put_row_into_database(row)
     write_section(row, write_course(row))
 
