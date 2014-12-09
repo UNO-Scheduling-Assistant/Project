@@ -28,6 +28,7 @@ module SectionsHelper
     sets[:crs_atr] = sec.crsatr_val
     sets[:role] = sec.role
     sets[:acad_group] = sec.acad_group
+    sets[:location] = sec.location
 
     sets[:times][:end] = update_time(nil, :start)
     sets
@@ -83,6 +84,7 @@ module SectionsHelper
     placeholders[:descr] = "Describe, if necessary"
     placeholders[:number] = "Enter Number"
     placeholders[:data] = "Enter Data"
+    placeholders[:comp] = "LAB-LEC-IND-SEM-FLD"
 
     placeholders
   end
@@ -92,12 +94,13 @@ module SectionsHelper
 
     labels[:acad_group] = "Academic Group"
     labels[:role] = "Instructor Role"
-    labels[:component] = "Component (LAB, LEC, IND, SEM, FLD)"
+    labels[:component] = "Component"
     labels[:session] = "Session Number"
     labels[:crs_atr] = "Cross Attribute"
     labels[:section] = "Section Number"
     labels[:sec_descr] = "Description"
     labels[:class_nbr] = "Class Number"
+    labels[:location] = "Location"
 
     labels
   end
