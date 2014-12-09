@@ -16,7 +16,6 @@ module HomeHelper
     csv_file = "Class Nbr,Subject,Catalog,Section,Comb Sect,CDescr,SDescr,Acad Group,Cap Enrl,Tot Enrl,Pat,Mtg Start,Mtg End,Facil ID,Capacity,Last,First Name,Role,Start Date,End Date,Session,Location,Mode,CrsAtr Val,Component\n"
 
     sections = Section.report_table_array
-
     sections.each { |sec| csv_file << write_csv_line(sec) << "\n" }
 
     send_data csv_file, filename: "PKI Rooms.csv"
@@ -121,7 +120,7 @@ module HomeHelper
   end
 
   def csv_comb(sec)
-    if sec.section_setting.sections.count > 1
+    if Section.find(sec.id).section_setting.sections.count > 1
       "C"
     else
       ""

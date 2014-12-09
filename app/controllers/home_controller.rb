@@ -17,7 +17,8 @@ class HomeController < ApplicationController
   end
 
   def export
-
+    write_csv
+   # redirect_to '/'
   end
 
   def list

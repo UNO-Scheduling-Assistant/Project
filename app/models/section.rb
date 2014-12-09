@@ -128,7 +128,8 @@ class Section < ActiveRecord::Base
   #
   # Returns an array of rows
   def self.report_table_query
-    report_query = ([]  <<  'sections.class_num as class_num, ' <<
+    report_query = ([]  << 'sections.id as id, ' << 
+                        'sections.class_num as class_num, ' <<
                         'courses.subject as subject, ' <<
                         'courses.course_id as course_id, ' <<
                         'sections.sec_id as sec_id, ' <<
