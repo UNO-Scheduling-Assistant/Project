@@ -72,4 +72,16 @@ class CourseDate < ActiveRecord::Base
 
 	has_many :section_settings
 	validates_with CourseDateValidator
+
+  def to_arr_element
+    element = []
+
+    element << "#{self.start_date} -- #{self.end_date}"
+    element << self.id
+
+    print element
+    puts ""
+
+    element
+  end
 end

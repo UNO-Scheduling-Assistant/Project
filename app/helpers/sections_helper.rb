@@ -6,6 +6,8 @@ module SectionsHelper
     list[:times] = update_times(params) unless disabled(params, :time_disabled)
     list[:instructors] = update_instructors(params) unless disabled(params, :instructor_disabled)
 
+    list[:dates] = update_dates
+
     list[:room] = update_current_room(params, list) unless disabled(params, :room_disabled)
     list[:time] = update_current_time(params, list) unless disabled(params, :time_disabled)
     list[:instructor] = update_current_instructor(params, list) unless disabled(params, :instructor_disabled)
@@ -21,6 +23,7 @@ module SectionsHelper
     sets[:component] = sec.component
     sets[:section] = sec.sec_id
     sets[:class_nbr] = sec.class_num
+    sets[:date] = sec.section_setting.course_date.to_arr_element
     sets[:room] = sec.section_setting.room.to_arr_element
     sets[:instructor] = sec.section_setting.instructor.to_arr_element
     sets[:time] = sec.section_setting.time_slot.to_sec_hash
@@ -184,6 +187,10 @@ module SectionsHelper
 
     puts "Here"
     default_element
+  end
+
+  def update_dates
+    CourseDate.all.map { |d| d.to_arr_element}
   end
 
   def update_current_instructor(params, hash)
