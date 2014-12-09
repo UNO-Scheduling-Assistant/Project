@@ -12,8 +12,40 @@ module HomeHelper
     csv.each { |row| put_row_into_database(row) }
   end
 
+  def write_csv
+    csv_file = "Class Nbr,Subject,Catalog,Section,Comb Sect,CDescr,SDescr,Acad Group,Cap Enrl,Tot Enrl,Pat,Mtg Start,Mtg End,Facil ID,Capacity,Last,First Name,Role,Start Date,End Date,Session,Location,Mode,CrsAtr Val,Component\n"
+
+    sections = Section.report_table_array
+    sections.each { |sec| csv_file << write_csv_line(sec) << "\n" }
+
+    send_data csv_file, filename: "PKI Rooms.csv"
+  end
+
   private
 
+  def generate_csv_line_order
+    [:class_num, :subject, :course_id, :sec_id, :comb, :course_name, :section_description, :acad_group, :enroll_cap, :tot_enr, :days, :start_time, :end_time, :room, :room_cap, :last_name, :first_name, :role, :start_date, :end_date, :session, :location, :mode, :crsatr_val, :component]
+  end
+
+  def write_csv_line(section)
+    line = ""
+    generate_csv_line_order.each_with_index { |item, i| line << (i > 0 ? "," : "") << handle_csv_item(section, item) }
+    line
+  end
+
+  def handle_csv_item(sec, item)
+    return case item
+    when :comb
+      csv_comb(sec)
+    when :tot_enr
+      "0"
+    when :room
+      building_room(sec)
+    else
+      "#{sec[item]}"
+    end
+  end
+  
   def put_row_into_database(row)
     write_section(row, write_course(row))
 
@@ -83,5 +115,16 @@ module HomeHelper
     {building: $1, room: $2.to_i}
   end
 
+  def building_room(section)
+    "#{section[:building]}#{section[:room_num]}"
+  end
+
+  def csv_comb(sec)
+    if Section.find(sec.id).section_setting.sections.count > 1
+      "C"
+    else
+      ""
+    end
+  end
 end
 
