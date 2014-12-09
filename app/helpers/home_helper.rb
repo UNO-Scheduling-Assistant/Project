@@ -30,8 +30,21 @@ module HomeHelper
 
   def write_csv_line(section)
     line = ""
-    generate_csv_line_order.each_with_index { |item, i| line << (i > 0 ? "," : "") << handle_csv_item(item) }
+    generate_csv_line_order.each_with_index { |item, i| line << (i > 0 ? "," : "") << handle_csv_item(section, item) }
     line
+  end
+
+  def handle_csv_item(sec, item)
+    return case item
+    when :comb
+      csv_comb(sec)
+    when :tot_enr
+      "0"
+    when :room
+      building_room(sec)
+    else
+      "#{sec[item]}"
+    end
   end
   
   def put_row_into_database(row)
@@ -103,5 +116,16 @@ module HomeHelper
     {building: $1, room: $2.to_i}
   end
 
+  def building_room(section)
+    "#{section[:building]}#{section[:room_num]}"
+  end
+
+  def csv_comb(sec)
+    if sec.section_setting.sections.count > 1
+      "C"
+    else
+      ""
+    end
+  end
 end
 
