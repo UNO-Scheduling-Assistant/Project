@@ -57,6 +57,7 @@ module SectionsHelper
      class_num: params[:class_nbr].to_i, 
      role: params[:role], 
      acad_group: params[:acad_group], 
+     sec_description: params[:sec_descr],
      component: params[:component],
      session: params[:session].to_i,
      sec_id: params[:section].to_i}
