@@ -11,5 +11,23 @@ require 'spec_helper'
 #   end
 # end
 describe SectionsHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context "Time Taken" do
+    context "timerange" do
+      it "equals 125 when time is 2:05:00 AM" do
+        expect(timerange("2:05:00 AM")).to eq(125)
+      end
+
+      it "equals 720 when time is 12:00:00 PM" do
+        expect(timerange("12:00:00 PM")).to eq(7200)
+      end
+
+      it "equals 0 when time is 12:00:00 AM" do
+        expect(timerange("12:00:00 AM")).to eq(0)
+      end
+    end
+
+    context "conflict time" do
+
+    end
+  end
 end

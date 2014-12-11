@@ -367,6 +367,8 @@ module SectionsHelper
   # If this above condition is false, we check the other side, time is taken if we have match
   # If this is not true, then time is ultimately not taken for this value.
   # return false
+  #
+  # Oh, and model is not necessary, sorry.
   def time_taken?(model, ss_obj, params)
     stime = time_format(params[:stime_h], params[:stime_m], params[:stime_p])
     etime = time_format(params[:etime_h], params[:etime_m], params[:etime_p])
