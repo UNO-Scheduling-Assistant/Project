@@ -26,7 +26,7 @@ module SectionsHelper
     sets[:date] = sec.section_setting.course_date.to_arr_element unless sec.section_setting.nil? || sec.section_setting.course_date.nil?
     sets[:room] = sec.section_setting.room.to_arr_element unless sec.section_setting.nil? || sec.section_setting.room.nil?
     sets[:instructor] = sec.section_setting.instructor.to_arr_element unless sec.section_setting.nil? || sec.section_setting.instructor.nil?
-    sets[:time] = sec.section_setting.time_slot.to_sec_hash unless sec.section_setting.nil? || sec.section_setting.time_slot.nil?
+    sets[:time] = sec.section_setting.time_slot.to_sec_hash unless sec.section_setting.nil? || sec.section_setting.time_slot.nil? || sec.section_setting.time_slot.start_time.nil?
     sets[:sec_descr] = sec.sec_description
     sets[:crs_atr] = sec.crsatr_val
     sets[:role] = sec.role
@@ -575,11 +575,15 @@ module SectionsHelper
   end
 
   def get_setime(params, using)
-    hour = params[using[:hr]]
-    min = sprintf("%02d", params[using[:min]])
-    per = params[using[:per]]
+  	hour = nil
+  	min = nil
+  	per = nil
 
-    return nil if hour.empty? || min.empty? || per.empty?
+    hour = params[using[:hr]] unless params[using[:hr]].empty?
+    min = sprintf("%02d", params[using[:min]]) unless params[using[:min]].empty?
+    per = params[using[:per]] unless params[using[:per]].empty?
+
+    return nil if hour.nil? || min.nil? || per.nil?
 
     #time = "#{params[using[:hr]]}:#{params[using[:min]]}:00 #{params[using[:per]]}"
     "#{hour}:#{min}:00 #{per}"
