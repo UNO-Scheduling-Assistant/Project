@@ -18,7 +18,7 @@ describe SectionsHelper do
       end
 
       it "equals 720 when time is 12:00:00 PM" do
-        expect(timerange("12:00:00 PM")).to eq(7200)
+        expect(timerange("12:00:00 PM")).to eq(720)
       end
 
       it "equals 0 when time is 12:00:00 AM" do
@@ -27,7 +27,18 @@ describe SectionsHelper do
     end
 
     context "conflict time" do
+      def conflict_expectation(days, stime, etime, expectation, time_slot_params)
+        ts = TimeSlot.create(time_slot_params)
+        t_range = get_range_times(stime, etime)
 
+        expect(has_conflict?(ts, days, t_range)).to eq(expectation)
+      end
+
+      context "returning false" do
+        it "occurs when comparing 'MWF' 2:00:00 PM - 3:00:00 PM to TR 2:30:00 pm - 4:50:00 PM" do
+          conflict_expectation("MWF".split(""), "2:00:00 PM", "3:00:00 PM", false, days: "TR", start_time: "2:30:00 PM", end_time: "4:50:00 PM")
+        end
+      end
     end
   end
 end

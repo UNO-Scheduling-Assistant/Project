@@ -96,7 +96,7 @@ class SectionsController < ApplicationController
     @section = Section.new(sec_params(params, ss_id))
     valid = @section.save
 
-    flash.notice = cu_flash(val: valid, action: 'created', model: "Date", record: @date)
+    flash.notice = cu_flash(val: valid, action: 'created', model: "Section", record: @section)
 
     redirect_to (valid ? course_path(params[:course_list].to_i) : :back)
   end
@@ -144,7 +144,7 @@ class SectionsController < ApplicationController
     @section = Section.find(params[:id])
     valid = @section.update(sec_params(params, ss_id))
 
-    flash.notice = cu_flash(val: valid, action: 'updated', model: "Date", record: @date)
+    flash.notice = cu_flash(val: valid, action: 'updated', model: "Section", record: @section)
 
     redirect_to (valid ? course_path(params[:course_list].to_i) : :back)
   end
